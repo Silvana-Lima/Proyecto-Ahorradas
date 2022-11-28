@@ -1,3 +1,11 @@
 body{
     font-family: 'Source Sans Pro', sans-serif;
 }
+
+.oculto{
+    display: none;
+}
+
+.modal{
+    position: relative;
+}
