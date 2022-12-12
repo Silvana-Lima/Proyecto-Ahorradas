@@ -14,7 +14,9 @@ const $btnCategory = $("#btn-category");
 const $btnReport = $("#btn-report");
 const $boxCategory = $(".box-category");
 const $boxReportsNoOperations = $(".box-insufficient-operations");
-const $boxReportsSummary = $(".box-reports-summary")
+const $boxReportsSummary = $(".box-reports-summary");
+const $navBarMenu = $(".navbar-menu");
+const $btnNavBarBurger = $(".navbar-burger")
 
 // ****---- Eventos ----****
 
@@ -52,3 +54,4 @@ $btnBalance.addEventListener("click", ()=>{
     $boxReportsSummary.classList.add("hidden");
 })
 
+$btnNavBarBurger.addEventListener("click", ()=> $navBarMenu.classList.toggle("is-active"));
