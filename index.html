@@ -55,14 +55,14 @@
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-end">
                   <div class="navbar-item">
-                    <a class="button is-primary is-size-4 ">
+                    <a class="button is-primary is-size-4" id="btn-balance">
                       <i class="fa-solid fa-chart-simple m-1 "></i> Balance
                     </a>
-                    <a class="button is-primary is-size-4">
+                    <a class="button is-primary is-size-4" id="btn-category">
                       <i class="fa-solid fa-tag m-1"></i> Categorías
                     </a>
             
-                    <a class="button is-primary is-size-4">
+                    <a class="button is-primary is-size-4" id="btn-report">
                       <i class="fa-solid fa-chart-pie m-1"></i> Reporte
                     </a>
                   </div>
@@ -172,7 +172,7 @@
             <div class="box p-5">
               <div class="container is-flex is-justify-content-space-between is-flex-wrap-wrap">
                 <h3 class="title is-3">Operaciones</h3>
-                <button class="js-modal-trigger button is-primary p-5" data-target="modal-js-example">
+                <button class="js-modal-trigger button is-primary p-5" id="btn-new-operation" data-target="modal-js-example">
                   + Nueva operación
                 </button>
               </div>
@@ -188,12 +188,11 @@
         </div>
       </section>
       
-      <!--***#### Modal - New operation ####***-->
+      <!--***#### Section New operation ####***-->
 
-      <section class="section cont-new-operation">
-            <div class="modal">
-              <div class="modal-background has-background-light"></div>
-              <div class="modal-content box">
+      <section class="section-new-operation container is-flex is-justify-content-center hidden">
+
+              <div class="box column is-two-thirds mt-6 box-new-operation p-5 hidden">
                 <h4 class="title">Nueva operación</h4>
                 <form id="form">
           
@@ -250,23 +249,18 @@
           
                 </form>
                 <div class="is-flex is-justify-content-flex-end">
-                  <button class="button mr-2">Cancelar</button>
-                  <button class="button is-success">Agregar</button>
-          
-                </div>
-          
-              </div>
+                  <button class="button mr-2" id="btn-cancel-new-operation">Cancelar</button>
+                  <button class="button is-success" id="btn-add-new-operation">Agregar</button>
           
             </div>
           
       </section>
 
-      <!--***#### Modal - Category ####***-->
+      <!--***#### Section Category ####***-->
 
-      <section class="section section-category">
-        <div class="modal">
-          <div class="modal-background has-background-light"></div>
-          <div class="modal-content box">
+      <section class="section-category container is-flex is-justify-content-center">
+
+          <div class="box column is-two-thirds mt-6 box-category p-5 hidden">
             <h4 class="title">Categorías</h4>
             <form id="form">
       
@@ -311,18 +305,16 @@
                 </ul>
               </div>
             </div>
-          </div>
+          <!-- </div>
       
-        </div>
+        </div> -->
 
       </section>
 
-      <!--***#### Modal - Reports ####***-->
-      <section class="section section-reports">
+      <!--***#### Section Reports ####***-->
+      <section class="section-reports container is-flex is-justify-content-center">
         
-        <div class="modal modal-insufficient-operations">
-          <div class="modal-background has-background-light"></div>
-          <div class="modal-content box">
+          <div class="box column is-two-thirds mt-6 box-insufficient-operations p-5 hidden">
             <h4 class="title">Reportes</h4>
             <figure class="image is-3by1 m-6">
               <img src="./assets/img-modal-report.svg" alt="">
@@ -330,11 +322,8 @@
             <h5 class="title is-4 has-text-centered has-text-dark">Operaciones insuficientes</h5>
             <p class="is-size-5 has-text-centered has-text-dark mb-6">Prueba agregando más operaciones</p>
           </div>
-        </div>
 
-        <div class="modal modal-reports-summary">
-          <div class="modal-background has-background-light"></div>
-          <div class="modal-content box box-reports-summary">
+          <div class="box column is-two-thirds mt-6 box-reports-summary p-5 hidden">
             <div class="block">
               <h5 class="title is-5">Resumen</h5>
               <table class="table is-fullwidth">
@@ -413,8 +402,6 @@
 
               </table> 
             </div>
-          </div>
-        </div>
 
       </section>
     </main>

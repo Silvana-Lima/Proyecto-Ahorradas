@@ -2,10 +2,10 @@ body{
     font-family: 'Source Sans Pro', sans-serif;
 }
 
-.oculto{
+.hidden{
     display: none;
 }
 
-.modal{
-    position: relative;
+.box-reports-summary{
+    width: 800px;
 }
