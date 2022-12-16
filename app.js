@@ -1,4 +1,4 @@
-// ****---- Utilidades ----****
+// ****---- Utilities ----****
 
 const $ = (selector) => document.querySelector(selector);
 
@@ -18,7 +18,7 @@ const $boxReportsSummary = $(".box-reports-summary");
 const $navBarMenu = $(".navbar-menu");
 const $btnNavBarBurger = $(".navbar-burger")
 
-// ****---- Eventos ----****
+// ****---- Events ----****
 
 $btnNewOperation.addEventListener("click", ()=>{
     $boxNewOperation.classList.remove("hidden");
@@ -54,4 +54,7 @@ $btnBalance.addEventListener("click", ()=>{
     $boxReportsSummary.classList.add("hidden");
 })
 
-$btnNavBarBurger.addEventListener("click", ()=> $navBarMenu.classList.toggle("is-active"));
+$btnNavBarBurger.addEventListener("click", ()=> {
+    $navBarMenu.classList.toggle("is-active");
+    $btnNavBarBurger.classList.toggle("is-active");
+});

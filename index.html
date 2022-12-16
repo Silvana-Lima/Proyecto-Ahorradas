@@ -240,9 +240,9 @@
                     <label class="label" for="select-type">Tipo</label>
                     <div class="control is-expanded">
                       <div class="select is-fullwidth">
-                        <select id="select-type">
-                          <option>Gasto</option>
-                          <option>Ganancia</option>
+                        <select id="new-operation-select-type">
+                          <option value="gasto">Gasto</option>
+                          <option value="ganancia">Ganancia</option>
                         </select>
                       </div>
                     </div>
@@ -252,14 +252,14 @@
                     <label class="label" for="select-category">Categoría</label>
                     <div class="control is-expanded">
                       <div class="select is-fullwidth">
-                        <select id="select-category">
-                          <option>Todas</option>
-                          <option>Comida</option>
-                          <option>Servicios</option>
-                          <option>Salidas</option>
-                          <option>Educación</option>
-                          <option>Transporte</option>
-                          <option>Trabajo</option>
+                        <select id="new-operation-select-category">
+                          <option value="todas">Todas</option>
+                          <option value="comida">Comida</option>
+                          <option value="servicios">Servicios</option>
+                          <option value="salidas">Salidas</option>
+                          <option value="educacion">Educación</option>
+                          <option value="transporte">Transporte</option>
+                          <option value="trabajo">Trabajo</option>
                         </select>
                       </div>
                     </div>
@@ -433,5 +433,6 @@
     </main>
 
     <script src="./app.js"></script>
+    <script src="./operations.js"></script>
 </body>
 </html>
