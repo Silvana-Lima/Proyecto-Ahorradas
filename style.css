@@ -2,10 +2,6 @@ body{
     font-family: 'Source Sans Pro', sans-serif;
 }
 
-.hidden{
-    display: none;
-}
-
 .box-reports-summary{
     width: 800px;
 }

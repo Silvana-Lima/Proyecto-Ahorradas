@@ -5,56 +5,62 @@ const $ = (selector) => document.querySelector(selector);
 
 // ****---- Variables ----****
 
-const $contBalance = $(".cont-balance");
-const $boxNewOperation = $(".box-new-operation");
+const $sectionBalance = $(".section-balance");
+const $sectionNewOperation = $(".section-new-operation");
 const $btnNewOperation = $("#btn-new-operation");
 const $btnCancelNewOperation = $("#btn-cancel-new-operation");
 const $btnBalance = $("#btn-balance");
 const $btnCategory = $("#btn-category");
 const $btnReport = $("#btn-report");
-const $boxCategory = $(".box-category");
+const $sectionCategory = $(".section-category");
+const $sectionReports = $(".section-reports");
 const $boxReportsNoOperations = $(".box-insufficient-operations");
 const $boxReportsSummary = $(".box-reports-summary");
 const $navBarMenu = $(".navbar-menu");
 const $btnNavBarBurger = $(".navbar-burger")
 
-// ****---- Events ----****
+// ****---- Events to change the screens----****
 
 $btnNewOperation.addEventListener("click", ()=>{
-    $boxNewOperation.classList.remove("hidden");
-    $contBalance.classList.add("hidden");
+    $sectionNewOperation.classList.remove("is-hidden");
+    $sectionBalance.classList.add("is-hidden");
 })
 
 $btnCancelNewOperation.addEventListener("click", ()=>{
-    $contBalance.classList.remove("hidden");
-    $boxNewOperation.classList.add("hidden");
+    $sectionBalance.classList.remove("is-hidden");
+    $sectionNewOperation.classList.add("is-hidden");
 })
 
 $btnCategory.addEventListener("click", ()=>{
-    $boxCategory.classList.remove("hidden");
-    $contBalance.classList.add("hidden");
-    $boxNewOperation.classList.add("hidden");
-    $boxReportsNoOperations.classList.add("hidden");
-    $boxReportsSummary.classList.add("hidden");
+    $sectionCategory.classList.remove("is-hidden");
+    $sectionBalance.classList.add("is-hidden");
+    $sectionNewOperation.classList.add("is-hidden");
+    $sectionReports.classList.add("is-hidden");
     
 })
 
 $btnReport.addEventListener("click", ()=>{
-    $boxReportsNoOperations.classList.remove("hidden");
-    $contBalance.classList.add("hidden");
-    $boxNewOperation.classList.add("hidden");
-    $boxCategory.classList.add("hidden");
+    $sectionReports.classList.remove("is-hidden");
+    $boxReportsSummary.classList.add("is-hidden");
+    $sectionBalance.classList.add("is-hidden");
+    $sectionNewOperation.classList.add("is-hidden");
+    $sectionCategory.classList.add("is-hidden");
+
 })
 
 $btnBalance.addEventListener("click", ()=>{
-    $contBalance.classList.remove("hidden");
-    $boxNewOperation.classList.add("hidden");
-    $boxCategory.classList.add("hidden");
-    $boxReportsNoOperations.classList.add("hidden");
-    $boxReportsSummary.classList.add("hidden");
+    $sectionBalance.classList.remove("is-hidden");
+    $sectionNewOperation.classList.add("is-hidden");
+    $sectionCategory.classList.add("is-hidden");
+    $sectionReports.classList.add("is-hidden");
 })
 
 $btnNavBarBurger.addEventListener("click", ()=> {
     $navBarMenu.classList.toggle("is-active");
     $btnNavBarBurger.classList.toggle("is-active");
 });
+
+
+const changeScreen = (seccion)=>{
+
+}

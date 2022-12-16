@@ -13,7 +13,7 @@ let operationsLocalStorage = JSON.parse(localStorage.getItem("datosIngresados"))
 
 let operations = operationsLocalStorage || [];
 
-console.log(operations);
+//console.log(operations);
 
 let operacionIngresada = {
   descripcion: "",
@@ -28,22 +28,20 @@ let operacionIngresada = {
 
   $btnAddNewOperation.addEventListener("click", ()=>{
 
-    const datos = {...operacionIngresada};
+    const data = {...operacionIngresada};
 
-    datos.descripcion = $newOperationDescription.value;
-    datos.monto = Number($newOperationAmount.value);
-    datos.tipo =  $newOperationSelectType.value;
-    datos.categoria = $newOperationSelectCategory.value;
-    datos.fecha = $newOperationDate.value;
+    data.descripcion = $newOperationDescription.value;
+    data.monto = Number($newOperationAmount.value);
+    data.tipo =  $newOperationSelectType.value;
+    data.categoria = $newOperationSelectCategory.value;
+    data.fecha = $newOperationDate.value;
 
-    operations.push(datos);
-    localStorage.setItem("datosIngresados", JSON.stringify(operations));
+    operations.push(data);
+    localStorage.setItem("datosIngresados", JSON.stringify(operations))
 
 })
 
-
-
-console.log(operations);
+//console.log(operations);
 
 
 
