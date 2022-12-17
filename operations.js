@@ -9,9 +9,13 @@ const $btnAddNewOperation = $("#btn-add-new-operation");
 
 const $totalGananciasBalance = $(".total-ganancias-balance");
 const $totalGastosBalance = $(".total-gastos-balance");
-const $totalBalance = $(".total-balance")
+const $totalBalance = $(".total-balance");
 const $selectType = $("#select-type");
-const $selectCategory = $("#select-category")
+const $selectCategory = $("#select-category");
+
+const $contWithoutResults = $(".cont-without-results");
+const $contOperations = $(".cont-operations");
+const $contTitleOperations = $(".cont-title-operations")
 
 let operationsLocalStorage = JSON.parse(
   localStorage.getItem("datosIngresados")
@@ -30,19 +34,18 @@ let operacionIngresada = {
 let moldebalance = {
   ganancia: 0,
   gasto: 0,
-  total: 0
-}
+  total: 0,
+};
 
 // ****---- Functions ----****
 
 let newBalance = {};
-let getBalance = (operations)=>{
-  newBalance = {...moldebalance};
+let getBalance = (operations) => {
+  newBalance = { ...moldebalance };
   let ganancia = 0;
   let gasto = 0;
 
-    for (const operation of operations) {
- 
+  for (const operation of operations) {
     if (operation.tipo === "ganancia") {
       ganancia += operation.monto;
     } else if (operation.tipo === "gasto") {
@@ -54,28 +57,60 @@ let getBalance = (operations)=>{
   newBalance.gasto = gasto;
   newBalance.total = ganancia - gasto;
 
-  return newBalance
+  return newBalance;
 };
 
-getBalance(operations)
+getBalance(operations);
 
-const showBalance = (newBalance)=>{
+const showBalance = (newBalance) => {
   $totalGananciasBalance.innerText = `+$${newBalance.ganancia}`;
   $totalGastosBalance.innerText = `-$${newBalance.gasto}`;
   $totalBalance.innerText = `$${newBalance.total}`;
-  
-}
+};
 
-showBalance(newBalance)
+showBalance(newBalance);
 
-const cleanerNewOperation =()=>{
+const cleanerNewOperation = () => {
   $newOperationDescription.value = "";
-  $newOperationAmount.value = 0 ;
+  $newOperationAmount.value = 0;
   $newOperationSelectType.value = "gasto";
   $newOperationSelectCategory.value = "todas";
-  $newOperationDate.value= "";
+  $newOperationDate.value = "";
+};
 
+const showOperations = (operations) => {
+  $contOperations.innerHTML = "";
+  for (const { descripcion, categoria, fecha, monto } of operations) {
+    $contOperations.innerHTML += `<div class="columns">
+                  <div class="column">
+                    <p class="item-operations-description">${descripcion}</p>
+                  </div>
+                  <div class="column">
+                    <p class="tag item-operations-category has-text-primary has-background-primary-light">${categoria}</p>
+                  </div>
+                  <div class="column">
+                    <p class="item-operations-date">${fecha}</p>
+                  </div>
+                  <div class="column">
+                    <p class="item-operations-amount">$${monto}</p>
+                  </div>
+                  <div class="column">
+                    <a href="" class="editar mr-3">Editar</a>
+                    <a href="" class="eliminar">eliminar</a>
+                  </div>
+                </div>`;
 
+   }
+      
+};
+
+//showOperations(operations)
+
+if (operations.length > 0) {
+  $contOperations.classList.remove("is-hidden");
+  $contTitleOperations.classList.remove("is-hidden");
+  $contWithoutResults.classList.add("is-hidden");
+  showOperations(operations);
 }
 
 // ****---- Events ----****
@@ -94,14 +129,10 @@ $btnAddNewOperation.addEventListener("click", () => {
 
   getBalance(operations);
   showBalance(newBalance);
-  $sectionNewOperation.classList.add("is-hidden")
-  $sectionBalance.classList.remove("is-hidden")
   cleanerNewOperation();
-
-  
+  showOperations(operations);
+  $sectionNewOperation.classList.add("is-hidden");
+  $sectionBalance.classList.remove("is-hidden");
+  $contOperations.classList.remove("is-hidden");
+  $contWithoutResults.classList.add("is-hidden");
 });
-
-
-
-
-
