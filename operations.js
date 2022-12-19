@@ -15,7 +15,8 @@ const $selectCategory = $("#select-category");
 
 const $contWithoutResults = $(".cont-without-results");
 const $contOperations = $(".cont-operations");
-const $contTitleOperations = $(".cont-title-operations")
+const $contTitleOperations = $(".cont-title-operations");
+
 
 let operationsLocalStorage = JSON.parse(
   localStorage.getItem("datosIngresados")
@@ -29,6 +30,7 @@ let operacionIngresada = {
   tipo: "",
   categoria: "",
   fecha: "",
+  id:"",
 };
 
 let moldebalance = {
@@ -78,9 +80,15 @@ const cleanerNewOperation = () => {
   $newOperationDate.value = "";
 };
 
+const removeOperation = (id)=>{
+  
+  console.log(id);
+ 
+}
+
 const showOperations = (operations) => {
   $contOperations.innerHTML = "";
-  for (const { descripcion, categoria, fecha, monto } of operations) {
+  for (const { descripcion, categoria, fecha, monto, id } of operations) {
     $contOperations.innerHTML += `<div class="columns">
                   <div class="column">
                     <p class="item-operations-description">${descripcion}</p>
@@ -92,19 +100,17 @@ const showOperations = (operations) => {
                     <p class="item-operations-date">${fecha}</p>
                   </div>
                   <div class="column">
-                    <p class="item-operations-amount">$${monto}</p>
+                    <p class="item-operations-amount has-text-weight-bold">$${monto}</p>
                   </div>
                   <div class="column">
                     <a href="" class="editar mr-3">Editar</a>
-                    <a href="" class="eliminar">eliminar</a>
+                    <a href="" class="eliminar" onclick="removeOperation(${id})" id="btn-delete-operation">Eliminar</a>
                   </div>
                 </div>`;
 
-   }
+    }
       
 };
-
-//showOperations(operations)
 
 if (operations.length > 0) {
   $contOperations.classList.remove("is-hidden");
@@ -123,6 +129,7 @@ $btnAddNewOperation.addEventListener("click", () => {
   data.tipo = $newOperationSelectType.value;
   data.categoria = $newOperationSelectCategory.value;
   data.fecha = $newOperationDate.value;
+  data.id = uuid.v1();
 
   operations.push(data);
   localStorage.setItem("datosIngresados", JSON.stringify(operations));
@@ -136,3 +143,4 @@ $btnAddNewOperation.addEventListener("click", () => {
   $contOperations.classList.remove("is-hidden");
   $contWithoutResults.classList.add("is-hidden");
 });
+
