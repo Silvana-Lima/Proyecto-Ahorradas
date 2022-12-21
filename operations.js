@@ -10,8 +10,6 @@ const $btnAddNewOperation = $("#btn-add-new-operation");
 const $totalGananciasBalance = $(".total-ganancias-balance");
 const $totalGastosBalance = $(".total-gastos-balance");
 const $totalBalance = $(".total-balance");
-const $selectType = $("#select-type");
-const $selectCategory = $("#select-category");
 
 const $contWithoutResults = $(".cont-without-results");
 const $contOperations = $(".cont-operations");
@@ -88,7 +86,7 @@ const removeOperation = (id)=>{
 
 const showOperations = (operations) => {
   $contOperations.innerHTML = "";
-  for (const { descripcion, categoria, fecha, monto, id } of operations) {
+  for (const { descripcion, monto, categoria, fecha, id } of operations) {
     $contOperations.innerHTML += `<div class="columns">
                   <div class="column">
                     <p class="item-operations-description">${descripcion}</p>
@@ -104,7 +102,7 @@ const showOperations = (operations) => {
                   </div>
                   <div class="column">
                     <a href="" class="editar mr-3">Editar</a>
-                    <a href="" class="eliminar" onclick="removeOperation(${id})" id="btn-delete-operation">Eliminar</a>
+                    <button class="eliminar" onclick="removeOperation(${id})" id="btn-delete-operation">Eliminar</button>
                   </div>
                 </div>`;
 
@@ -143,4 +141,3 @@ $btnAddNewOperation.addEventListener("click", () => {
   $contOperations.classList.remove("is-hidden");
   $contWithoutResults.classList.add("is-hidden");
 });
-
