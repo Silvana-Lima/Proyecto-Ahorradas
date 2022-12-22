@@ -1,7 +1,7 @@
 // ****---- Variables ----****
 
-const $selectType = $("#select-type");
-const $selectCategory = $("#select-category");
+const $selectType = $("#filter-select-type");
+const $selectCategory = $("#filter-select-category");
 
 // ****---- Functions ----****
 

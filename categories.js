@@ -1,6 +1,8 @@
 const $btnAddCategory = $("#btn-add-category");
-const $inputCategory = $(".input-category")
-console.log($inputCategory);
+const $inputCategory = $(".input-category");
+const $newOperationSelectCategory = $("#new-operation-select-category");
+const $contCategories = $(".cont-category");
+console.log($btnAddCategory);
 
 let categoriesLocalStorage = JSON.parse(localStorage.getItem("categorias"));
 
@@ -37,6 +39,8 @@ let enteredCategory = {
 
 $btnAddCategory.addEventListener("click", (event)=>{
     event.preventDefault()
+
+    console.log(event);
     const newCategory = {...enteredCategory};
 
     newCategory.nombre = $inputCategory.value;
@@ -44,10 +48,25 @@ $btnAddCategory.addEventListener("click", (event)=>{
 
     category.push(newCategory);
 
-    localStorage.setItem("categorias", JSON.stringify(category))
+    localStorage.setItem("categorias", JSON.stringify(category));
+    showCategory(category);
 })
 
+const showCategory = (categories)=>{
+    $newOperationSelectCategory.innerHTML= "";
+    $selectCategory.innerHTML=`<option value="todas">Todas</option>`;
+    $contCategories.innerHTML="";
 
+    for (const {nombre, id} of categories) {
+        $newOperationSelectCategory.innerHTML += `<option value="${nombre}" id="${id}">${nombre}</option>`
 
-console.log(category);
+        $selectCategory.innerHTML += `<option value="${nombre}" id="${id}">${nombre}</option>`
 
+        $contCategories.innerHTML += `<div class="columns is-mobile columns-categories">
+        <div class="column is-three-quarters-desktop is-half-mobile">${nombre}
+        </div>
+        <div class="column"><a href="" mr-3>Editar</a> <a href="">Eliminar</a></div></div>`
+    }
+}
+
+showCategory(category);

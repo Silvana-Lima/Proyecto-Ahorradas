@@ -4,7 +4,6 @@ const $newOperationDescription = $("#description");
 const $newOperationAmount = $("#amount");
 const $newOperationDate = $("#date");
 const $newOperationSelectType = $("#new-operation-select-type");
-const $newOperationSelectCategory = $("#new-operation-select-category");
 const $btnAddNewOperation = $("#btn-add-new-operation");
 
 const $totalGananciasBalance = $(".total-ganancias-balance");
@@ -74,7 +73,7 @@ const cleanerNewOperation = () => {
   $newOperationDescription.value = "";
   $newOperationAmount.value = 0;
   $newOperationSelectType.value = "gasto";
-  $newOperationSelectCategory.value = "todas";
+  $newOperationSelectCategory.value = "Comida";
   $newOperationDate.value = "";
 };
 
