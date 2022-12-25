@@ -17,7 +17,10 @@ const $sectionReports = $(".section-reports");
 const $boxReportsNoOperations = $(".box-insufficient-operations");
 const $boxReportsSummary = $(".box-reports-summary");
 const $navBarMenu = $(".navbar-menu");
-const $btnNavBarBurger = $(".navbar-burger")
+const $btnNavBarBurger = $(".navbar-burger");
+
+const $selectType = $("#filter-select-type");
+const $selectCategory = $("#filter-select-category");
 
 // ****---- Events to change the screens----****
 

@@ -2,7 +2,6 @@ const $btnAddCategory = $("#btn-add-category");
 const $inputCategory = $(".input-category");
 const $newOperationSelectCategory = $("#new-operation-select-category");
 const $contCategories = $(".cont-category");
-console.log($btnAddCategory);
 
 let categoriesLocalStorage = JSON.parse(localStorage.getItem("categorias"));
 
@@ -40,7 +39,6 @@ let enteredCategory = {
 $btnAddCategory.addEventListener("click", (event)=>{
     event.preventDefault()
 
-    console.log(event);
     const newCategory = {...enteredCategory};
 
     newCategory.nombre = $inputCategory.value;
@@ -65,7 +63,7 @@ const showCategory = (categories)=>{
         $contCategories.innerHTML += `<div class="columns is-mobile columns-categories">
         <div class="column is-three-quarters-desktop is-half-mobile">${nombre}
         </div>
-        <div class="column"><a href="" mr-3>Editar</a> <a href="">Eliminar</a></div></div>`
+        <div class="column"><a href="" class="mr-3">Editar</a> <a href="">Eliminar</a></div></div>`
     }
 }
 

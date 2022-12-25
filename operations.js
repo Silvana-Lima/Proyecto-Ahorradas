@@ -2,7 +2,7 @@
 
 const $newOperationDescription = $("#description");
 const $newOperationAmount = $("#amount");
-const $newOperationDate = $("#date");
+const $newOperationInputDate = $("#new-operation-input-date")
 const $newOperationSelectType = $("#new-operation-select-type");
 const $btnAddNewOperation = $("#btn-add-new-operation");
 
@@ -13,6 +13,8 @@ const $totalBalance = $(".total-balance");
 const $contWithoutResults = $(".cont-without-results");
 const $contOperations = $(".cont-operations");
 const $contTitleOperations = $(".cont-title-operations");
+
+const $inputFilterDate = $("#input-filter-date");
 
 
 let operationsLocalStorage = JSON.parse(
@@ -74,7 +76,6 @@ const cleanerNewOperation = () => {
   $newOperationAmount.value = 0;
   $newOperationSelectType.value = "gasto";
   $newOperationSelectCategory.value = "Comida";
-  $newOperationDate.value = "";
 };
 
 const removeOperation = (id)=>{
@@ -116,6 +117,19 @@ if (operations.length > 0) {
   showOperations(operations);
 }
 
+window.onload = function(){
+  var date = new Date(); 
+  var month = date.getMonth()+1; 
+  var day = date.getDate(); 
+  var year = date.getFullYear(); 
+  if(day<10)
+    day='0'+day; 
+  if(month<10)
+    month='0'+month 
+  $inputFilterDate.value=year+"-"+month+"-"+day;
+  $newOperationInputDate.value=year+"-"+month+"-"+day;
+}
+
 // ****---- Events ----****
 
 $btnAddNewOperation.addEventListener("click", () => {
@@ -125,7 +139,7 @@ $btnAddNewOperation.addEventListener("click", () => {
   data.monto = Number($newOperationAmount.value);
   data.tipo = $newOperationSelectType.value;
   data.categoria = $newOperationSelectCategory.value;
-  data.fecha = $newOperationDate.value;
+  data.fecha = $newOperationInputDate.value;
   data.id = uuid.v1();
 
   operations.push(data);
@@ -139,4 +153,5 @@ $btnAddNewOperation.addEventListener("click", () => {
   $sectionBalance.classList.remove("is-hidden");
   $contOperations.classList.remove("is-hidden");
   $contWithoutResults.classList.add("is-hidden");
+  $contTitleOperations.classList.remove("is-hidden");
 });
