@@ -21,6 +21,7 @@ const $btnNavBarBurger = $(".navbar-burger");
 
 const $selectType = $("#filter-select-type");
 const $selectCategory = $("#filter-select-category");
+const $selectOrder = $("#filter-select-order")
 
 // ****---- Events to change the screens----****
 

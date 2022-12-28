@@ -1,41 +1,96 @@
 // ****---- Functions ----****
+console.log(operations);
+const filterByType = (operations, filter) => {
 
-const filterByEarnings = (operations) =>  typeEarnings = operations.filter((operation) => operation.tipo === "ganancia");
+  let type = [];
+  if (filter === "todos") {
+    type = operations;
+  } else {
+    type = operations.filter((operation) => operation.tipo === filter)
+  }
+  return type;
+};
 
-const filterByExpenses = (operations) => typeEspenses = operations.filter((operation) => operation.tipo === "gasto");
+const filterByCategory = (operations, filter) => {
 
+  let category = [];
+  if (filter === "todas") {
+    category = operations;
+  } else {
+   category = operations.filter((operation) => operation.categoria === filter)
+  }
+  return category;
+
+};
+
+function convertirFecha (fechaString) {
+  var fechaND = fechaString.split("-");
+   var anio = fechaND[0];
+   var mes = fechaND[1] - 1;
+   var dia = fechaND[2];
+
+  return new Date(anio, mes, dia);
+}
+
+const filterByDate = (operations, filter)=> date = operations.filter((operation) => operation.fecha >= filter)
+
+const filterByOrder = (operations, filter) => {
+  let arrayOrdenado = [];
+  switch (filter) {
+    case "mas reciente":
+      arrayOrdenado = operations.sort(
+        (a, b) => convertirFecha(b.fecha) - convertirFecha(a.fecha)
+      );
+      break;
+
+    case "menos reciente":
+      arrayOrdenado = operations.sort(
+        (a, b) => convertirFecha(a.fecha) - convertirFecha(b.fecha)
+      );
+      break;
+
+    case "menor monto":
+      arrayOrdenado = operations.sort((a, b) => a.monto - b.monto);
+      break;
+
+    case "mayor monto":
+      arrayOrdenado = operations.sort((a, b) => b.monto - a.monto);
+      break;
+
+    case "a/z":
+      arrayOrdenado = operations.sort((a, b) => a.descripcion - b.descripcion); //error
+      break;
+
+    case "z/a":
+      arrayOrdenado = operations.sort((a, b) => b.descripcion - a.descripcion); //error
+      break;
+  }
+
+  return arrayOrdenado;
+};
 // ****---- Events ----****
 
 $selectType.addEventListener("change", (event) => {
   const selection = event.target.value;
 
-  switch (selection) {
-    case "todos":
-      showOperations(operations);
-      break;
-    case "ganancia":
-      showOperations(filterByEarnings(operations));
-      break;
-    case "gasto":
-      showOperations(filterByExpenses(operations));
-      break;
-  }
+  showOperations(filterByType(operations, selection));
 });
 
 $selectCategory.addEventListener("change", (event) => {
-  let categorySelected = [];
+  const selection = event.target.value;
 
-  if (event.target.value === "todas") {
-    categorySelected = [...operations];
-  } else {
-    categorySelected = operations.filter(
-      (operation) => operation.categoria === event.target.value
-    );
-  }
-  showOperations(categorySelected);
+  showOperations(filterByCategory(operations, selection));
 });
 
-$inputFilterDate.addEventListener(("change"), (event)=>{
-  const date = event.target.value;
-  console.log(date);
-})
+$inputFilterDate.addEventListener("change", (event) => {
+  const selection = event.target.value;
+  console.log(selection);
+  showOperations(filterByDate(operations, selection));
+});
+
+$selectOrder.addEventListener("change", (event) => {
+  const selection = event.target.value;
+  console.log(selection);
+
+  showOperations(filterByOrder(operations, selection));
+});
