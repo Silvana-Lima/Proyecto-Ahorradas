@@ -70,6 +70,17 @@ const filterByOrder = (operations, filter) => {
 };
 // ****---- Events ----****
 
+$btnHideFilters.addEventListener("click", (event)=>{
+  event.preventDefault()
+  $formFilters.classList.toggle("is-hidden");
+
+  if ($btnHideFilters.innerText.includes("Ocultar")) {
+    $btnHideFilters.innerText = "Mostrar filtros"
+  } else if ($btnHideFilters.innerText.includes("Mostrar")){
+    $btnHideFilters.innerText = "Ocultar filtros"
+  }
+})
+
 $selectType.addEventListener("change", (event) => {
   const selection = event.target.value;
 
