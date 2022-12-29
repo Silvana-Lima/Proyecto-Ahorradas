@@ -24,7 +24,9 @@ const $selectCategory = $("#filter-select-category");
 const $selectOrder = $("#filter-select-order");
 
 const $btnHideFilters = $(".btn-hide-filter");
-const $formFilters = $("#form-filters")
+const $formFilters = $("#form-filters");
+
+const $contSummary = $(".cont-summary");
 
 // ****---- Events to change the screens----****
 
@@ -48,7 +50,8 @@ $btnCategory.addEventListener("click", ()=>{
 
 $btnReport.addEventListener("click", ()=>{
     $sectionReports.classList.remove("is-hidden");
-    $boxReportsSummary.classList.add("is-hidden");
+    $boxReportsSummary.classList.remove("is-hidden");
+    $boxReportsNoOperations.classList.add("is-hidden")
     $sectionBalance.classList.add("is-hidden");
     $sectionNewOperation.classList.add("is-hidden");
     $sectionCategory.classList.add("is-hidden");

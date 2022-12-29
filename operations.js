@@ -87,7 +87,7 @@ const removeOperation = (id)=>{
 const showOperations = (operations) => {
   $contOperations.innerHTML = "";
   for (const { descripcion, monto, categoria, fecha, id } of operations) {
-    $contOperations.innerHTML += `<div class="columns">
+    $contOperations.innerHTML += `<div class="columns is-mobile">
                   <div class="column">
                     <p class="item-operations-description">${descripcion}</p>
                   </div>

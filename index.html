@@ -178,7 +178,7 @@
                 <p class="is-size-5 has-text-centered has-text-dark mb-6">Cambia los filtros o agrega operaciones</p>
               </div>
               <div class="cont-title-operations mt-5 is-hidden">
-                 <div class="columns">
+                 <div class="columns is-mobile">
                   <div class="column">
                     <h6 class="title is-6">Descripción</h6>
                   </div>
@@ -304,85 +304,71 @@
             <p class="is-size-5 has-text-centered has-text-dark mb-6">Prueba agregando más operaciones</p>
           </div>
 
-          <div class="box column is-two-thirds mt-6 box-reports-summary p-5">
-            <div class="block">
-              <h5 class="title is-5">Resumen</h5>
-              <table class="table is-fullwidth">
-                <tbody>
-                  <tr>
-                    <th>Categoría con mayor ganancia</th>
-                    <td>0</td>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <th>Categoría con mayor gasto</th>
-                    <td>0</td>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <th>Categoría con mayor balance</th>
-                    <td>0</td>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <th>Mes con mayor ganancia</th>
-                    <td>0</td>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <th>Mes con mayor gasto</th>
-                    <td>0</td>
-                    <td>0</td>
-                  </tr>                 
-                </tbody>
-
-              </table> 
+          <div class="box column is-two-thirds mt-6 box-reports-summary p-6">
+            <h3 class="title is-3 mb-6">Reportes</h3>
+            <h4 class="title is-5">Resumen</h4>
+            <div class="columns is-mobile cont-summary">
+              <!-- <div class="column is-two-thirds">
+                <p class="has-text-weight-bold mb-3">Categoría con mayor ganancia</p>
+                <p class="has-text-weight-bold mb-3">Categoría con mayor gasto</p>
+                <p class="has-text-weight-bold mb-3">Categoría con mayor balance</p>
+                <p class="has-text-weight-bold mb-3">Mes con mayor ganancia</p>
+                <p class="has-text-weight-bold mb-3">Mes con mayor gasto</p>
+              </div>
+              <div class="column">
+                <p class="tag has-text-primary has-background-primary-light mb-3">Hola</p>
+                <p class="mb-3">hbh</p>
+                <p class="mb-3">jjjh</p>
+                <p></p>
+                <p></p>
+              </div>
+              <div class="column">
+                <p class="mb-3">54546</p>
+                <p class="mb-3">5454</p>
+                <p class="mb-3">545</p>
+                <p></p>
+                <p></p>
+              </div> -->
             </div>
-            <div class="block">
-              <h5 class="title is-5">Totales por categorías</h5>
-              <table class="table is-fullwidth">
-                <thead>
-                  <tr>
-                    <th>Categoría</th>
-                    <th>Ganancias</th>
-                    <th>Gastos</th>
-                    <th>Balance</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th>Comida</th>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                  </tr>
-                  
-                </tbody>
-
-              </table>
+            <h4 class="title is-5">Totales por categorías</h4>
+            <div class="columns is-mobile">
+              <div class="column">
+                <p class="has-text-weight-bold">Categoria</p>
+                <p></p>
+              </div>
+              <div class="column">
+                <p class="has-text-weight-bold">Ganancias</p>
+                <p></p>
+              </div>
+              <div class="column">
+                <p class="has-text-weight-bold">Gastos</p>
+                <p></p>
+              </div>
+              <div class="column">
+                <p class="has-text-weight-bold">Balance</p>
+                <p></p>
+              </div>
             </div>
-            <div class="block">
-              <h5 class="title is-5">Totales por mes</h5>
-              <table class="table is-fullwidth">
-                <thead>
-                  <tr>
-                    <th>Mes</th>
-                    <th>Ganancias</th>
-                    <th>Gastos</th>
-                    <th>Balance</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th>11/22</th>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                  </tr>
-                </tbody>
-
-              </table> 
+            <h4 class="title is-5">Totales por mes</h4>
+            <div class="columns is-mobile">
+              <div class="column">
+                <p class="has-text-weight-bold">Mes</p>
+                <p></p>
+              </div>
+              <div class="column">
+                <p class="has-text-weight-bold">Ganancias</p>
+                <p></p>
+              </div>
+              <div class="column">
+                <p class="has-text-weight-bold">Gastos</p>
+                <p></p>
+              </div>
+              <div class="column">
+                <p class="has-text-weight-bold">Balance</p>
+                <p></p>
+              </div>
             </div>
+          </div>
 
       </section>
     </main>
@@ -391,6 +377,7 @@
     <script src="./operations.js"></script>
     <script src="./categories.js"></script>
     <script src="./filters.js"></script>
+    <script src="./reports.js"></script>
     
 
     <!-- Framework to get random id -->
