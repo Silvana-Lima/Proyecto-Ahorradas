@@ -27,6 +27,7 @@ const $btnHideFilters = $(".btn-hide-filter");
 const $formFilters = $("#form-filters");
 
 const $contSummary = $(".cont-summary");
+const $contTotalByCategory = $(".cont-total-by-category")
 
 // ****---- Events to change the screens----****
 
