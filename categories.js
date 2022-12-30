@@ -50,6 +50,12 @@ $btnAddCategory.addEventListener("click", (event)=>{
     showCategory(category);
 })
 
+const removeCategory = (id)=>{
+    event.preventDefault();
+     console.log(id);
+
+  }
+
 const showCategory = (categories)=>{
     $newOperationSelectCategory.innerHTML= "";
     $selectCategory.innerHTML=`<option value="todas">Todas</option>`;
@@ -63,8 +69,9 @@ const showCategory = (categories)=>{
         $contCategories.innerHTML += `<div class="columns is-mobile columns-categories">
         <div class="column is-three-quarters-desktop is-half-mobile">${nombre}
         </div>
-        <div class="column"><a href="" class="mr-3">Editar</a> <a href="">Eliminar</a></div></div>`
+        <div class="column"><a href="" class="mr-3">Editar</a> <a href="" class="btn-category-delete" onclick="removeCategory(${id})">Eliminar</a></div></div>`
     }
 }
 
 showCategory(category);
+

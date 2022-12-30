@@ -95,20 +95,23 @@ const showOperations = (operations) => {
                     <p class="tag item-operations-category has-text-primary has-background-primary-light">${categoria}</p>
                   </div>
                   <div class="column">
-                    <p class="item-operations-date">${fecha}</p>
+                    <p class="item-operations-date is-hidden-mobile">${fecha}</p>
                   </div>
                   <div class="column">
                     <p class="item-operations-amount has-text-weight-bold">$${monto}</p>
                   </div>
                   <div class="column">
                     <a href="" class="editar mr-3">Editar</a>
-                    <button class="eliminar" onclick="removeOperation(${id})" id="btn-delete-operation">Eliminar</button>
+                    <a href="" class="eliminar" onclick="removeOperation(${id})" id="btn-delete-operation">Eliminar</a>
                   </div>
-                </div>`;
+                </div> <hr class="is-hidden-desktop">`;
 
     }
       
 };
+
+let $btnDeleteOperation = $(".eliminar");
+console.log($btnDeleteOperation);
 
 if (operations.length > 0) {
   $contOperations.classList.remove("is-hidden");

@@ -1,6 +1,6 @@
-let getTotalsByCategory = (operaciones, categorias) => {
-  let opTipoGanancia = filterByType(operaciones, "ganancia");
-  let opTipoGasto = filterByType(operaciones, "gasto");
+let getTotalsByCategory = (categorias) => {
+  let opTipoGanancia = filterByType("ganancia");
+  let opTipoGasto = filterByType("gasto");
   let nuevoArrayCategorias = [...categorias];
 
   for (const categoria of nuevoArrayCategorias) {
@@ -32,7 +32,7 @@ let getTotalsByCategory = (operaciones, categorias) => {
 };
 
 const categMayorGanancia = () => {
-  let categGanancias = getTotalsByCategory(operations, category);
+  let categGanancias = getTotalsByCategory(category);
 
   let categoriaMayorGanancia = {
     nombre: "",
@@ -50,7 +50,7 @@ const categMayorGanancia = () => {
 };
 
 const categMayorGasto = ()=>{
-    let categGastos = getTotalsByCategory(operations, category);
+    let categGastos = getTotalsByCategory(category);
 
   let categoriaMayorGasto = {
     nombre: "",
@@ -68,7 +68,7 @@ const categMayorGasto = ()=>{
 }
 
 const catMayorBalance = ()=>{
-  let categBalance = getTotalsByCategory(operations, category);
+  let categBalance = getTotalsByCategory(category);
 
   let categoriaMayorBalance = {
     nombre: "",
@@ -85,39 +85,64 @@ const catMayorBalance = ()=>{
   return categoriaMayorBalance;
 }
 
+const getTotalsByMonth = ()=>{
+const array = [];
+
+const totalsbyMonth = {
+  mes:"",
+  ganancia: 0,
+  gasto: 0
+}
+
+for (const {fecha, tipo, monto} of operations) {
+
+}
+
+console.log(array);
+}
+
+
+getTotalsByMonth()
+
 const showReports = () => {
   let mayorGanancia = categMayorGanancia();
   let mayorGasto = categMayorGasto();
   let mayorBalance = catMayorBalance();
-  let arrayCategorias = getTotalsByCategory(operations, category);
+  let arrayCategorias = getTotalsByCategory(category);
 
-  $contSummary.innerHTML = `<div class="column is-two-thirds">
-<p class="has-text-weight-bold mb-3">Categoría con mayor ganancia</p>
-<p class="has-text-weight-bold mb-3">Categoría con mayor gasto</p>
-<p class="has-text-weight-bold mb-3">Categoría con mayor balance</p>
-<p class="has-text-weight-bold mb-3">Mes con mayor ganancia</p>
-<p class="has-text-weight-bold mb-3">Mes con mayor gasto</p>
+$contSummary.innerHTML =`<div class="columns is-mobile">
+<div class="column has-text-weight-bold ">Categoría con mayor ganancia</div>
+<div class="column has-text-right"><p class="tag has-text-primary has-background-primary-light">${mayorGanancia.nombre}</p></div>
+<div class="column has-text-right">+$${mayorGanancia.ganancia}</div>
 </div>
-<div class="column has-text-right">
-<p class="tag has-text-primary has-background-primary-light mb-3">${mayorGanancia.nombre}</p>
-<p class="tag has-text-primary has-background-primary-light mb-3">${mayorGasto.nombre}</p>
-<p class="tag has-text-primary has-background-primary-light mb-3">${mayorBalance.nombre}</p>
-<p></p>
-<p></p>
+<div class="columns is-mobile">
+    <div class="column has-text-weight-bold ">Categoría con mayor gasto</div>
+    <div class="column has-text-right"><p class="tag has-text-primary has-background-primary-light">${mayorGasto.nombre}</p></div>
+    <div class="column has-text-right">$${mayorGasto.gasto}</div>
 </div>
-<div class="column has-text-right">
-<p class="mb-3">+$${mayorGanancia.ganancia}</p>
-<p class="mb-3">$${mayorGasto.gasto}</p>
-<p class="mb-3">$${mayorBalance.balance}</p>
-<p></p>
-<p></p>
-</div>`;
+<div class="columns is-mobile">
+    <div class="column has-text-weight-bold ">Categoría con mayor balance</div>
+    <div class="column has-text-right"><p class="tag has-text-primary has-background-primary-light">${mayorBalance.nombre}</p></div>
+    <div class="column has-text-right">$${mayorBalance.balance}</div>
+</div>
+<div class="columns is-mobile">
+    <div class="column has-text-weight-bold ">Mes con mayor ganancia</div>
+    <div class="column has-text-right"></div>
+    <div class="column has-text-right"></div>
+</div>
+<div class="columns is-mobile mb-5">
+    <div class="column has-text-weight-bold ">Mes con mayor gasto</div>
+    <div class="column has-text-right"></div>
+    <div class="column has-text-right"></div>
+</div>`
 
-for (const {nombre, ganancia, gasto, balance} of arrayCategorias) {
-    $contTotalByCategory.innerHTML += `<div class="columns"><div class="column"><p>${nombre}</p></div>
-    <div class="column"><p>$${ganancia}</p></div>
-    <div class="column"><p>$${gasto}</p></div>
+  for (const {nombre, ganancia, gasto, balance} of arrayCategorias) {
+    if (balance !== 0) {
+    $contTotalByCategory.innerHTML += `<div class="columns is-mobile"><div class="column"><p>${nombre}</p></div>
+    <div class="column"><p class="has-text-primary">+$${ganancia}</p></div>
+    <div class="column"><p class="has-text-danger">-$${gasto}</p></div>
     <div class="column"><p>$${balance}</p></div></div>`
+}
 }
 };
 

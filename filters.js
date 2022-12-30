@@ -1,6 +1,6 @@
 // ****---- Functions ----****
-console.log(operations);
-const filterByType = (operations, filter) => {
+
+const filterByType = (filter) => {
 
   let type = [];
   if (filter === "todos") {
@@ -11,7 +11,7 @@ const filterByType = (operations, filter) => {
   return type;
 };
 
-const filterByCategory = (operations, filter) => {
+const filterByCategory = (filter) => {
 
   let category = [];
   if (filter === "todas") {
@@ -32,9 +32,9 @@ function convertirFecha (fechaString) {
   return new Date(anio, mes, dia);
 }
 
-const filterByDate = (operations, filter)=> date = operations.filter((operation) => operation.fecha >= filter)
+const filterByDate = (filter)=> date = operations.filter((operation) => operation.fecha >= filter)
 
-const filterByOrder = (operations, filter) => {
+const filterByOrder = (filter) => {
   let arrayOrdenado = [];
   switch (filter) {
     case "mas reciente":
@@ -84,24 +84,23 @@ $btnHideFilters.addEventListener("click", (event)=>{
 $selectType.addEventListener("change", (event) => {
   const selection = event.target.value;
 
-  showOperations(filterByType(operations, selection));
+  showOperations(filterByType(selection));
 });
 
 $selectCategory.addEventListener("change", (event) => {
   const selection = event.target.value;
 
-  showOperations(filterByCategory(operations, selection));
+  showOperations(filterByCategory(selection));
 });
 
 $inputFilterDate.addEventListener("change", (event) => {
   const selection = event.target.value;
-  console.log(selection);
-  showOperations(filterByDate(operations, selection));
+  
+  showOperations(filterByDate(selection));
 });
 
 $selectOrder.addEventListener("change", (event) => {
   const selection = event.target.value;
-  console.log(selection);
 
-  showOperations(filterByOrder(operations, selection));
+  showOperations(filterByOrder(selection));
 });
