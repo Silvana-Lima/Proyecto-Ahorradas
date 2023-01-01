@@ -1,6 +1,6 @@
 let getTotalsByCategory = (categorias) => {
-  let opTipoGanancia = filterByType("ganancia");
-  let opTipoGasto = filterByType("gasto");
+  let opTipoGanancia = filterByType("ganancia", operations);
+  let opTipoGasto = filterByType("gasto", operations);
   let nuevoArrayCategorias = [...categorias];
 
   for (const categoria of nuevoArrayCategorias) {

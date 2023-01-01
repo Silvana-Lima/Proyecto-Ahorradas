@@ -103,7 +103,7 @@ window.onload = function(){
     day='0'+day; 
   if(month<10)
     month='0'+month 
-  $inputFilterDate.value=year+"-"+month+"-"+day;
+
   $newOperationInputDate.value=year+"-"+month+"-"+day;
 }
 

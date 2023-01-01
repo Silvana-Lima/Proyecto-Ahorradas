@@ -1,6 +1,6 @@
 // ****---- Functions ----****
 
-const filterByType = (filter) => {
+const filterByType = (filter, operations) => {
 
   let type = [];
   if (filter === "todos") {
@@ -11,7 +11,7 @@ const filterByType = (filter) => {
   return type;
 };
 
-const filterByCategory = (filter) => {
+const filterByCategory = (filter, operations) => {
 
   let category = [];
   if (filter === "todas") {
@@ -32,9 +32,9 @@ function convertirFecha (fechaString) {
   return new Date(anio, mes, dia);
 }
 
-const filterByDate = (filter)=> date = operations.filter((operation) => operation.fecha >= filter)
+const filterByDate = (filter, operations)=> date = operations.filter((operation) => operation.fecha >= filter)
 
-const filterByOrder = (filter) => {
+const filterByOrder = (filter, operations) => {
   let arrayOrdenado = [];
   switch (filter) {
     case "mas reciente":
@@ -57,17 +57,29 @@ const filterByOrder = (filter) => {
       arrayOrdenado = operations.sort((a, b) => b.monto - a.monto);
       break;
 
-    case "a/z":
-      arrayOrdenado = operations.sort((a, b) => a.descripcion - b.descripcion); //error
-      break;
+    // case "a/z":
+    //   arrayOrdenado = operations.sort(operation.descripcion); //error
+    //   break;
 
-    case "z/a":
-      arrayOrdenado = operations.sort((a, b) => b.descripcion - a.descripcion); //error
-      break;
+    // case "z/a":
+    //   arrayOrdenado = operations.sort((a, b) => b.descripcion - a.descripcion); //error
+    //   break;
   }
 
   return arrayOrdenado;
 };
+
+let filterOperation = ()=>{
+  let filteredOperations = [...operations];
+
+  filteredOperations = filterByType($selectType.value, filteredOperations );
+  filteredOperations = filterByCategory($selectCategory.value, filteredOperations);
+  filteredOperations = filterByOrder($selectOrder.value, filteredOperations);
+  filteredOperations = filterByDate($inputFilterDate.value, filteredOperations);
+  
+  return filteredOperations;
+  }
+
 // ****---- Events ----****
 
 $btnHideFilters.addEventListener("click", (event)=>{
@@ -81,26 +93,18 @@ $btnHideFilters.addEventListener("click", (event)=>{
   }
 })
 
-$selectType.addEventListener("change", (event) => {
-  const selection = event.target.value;
-
-  showOperations(filterByType(selection));
+$selectType.addEventListener("change", () => {
+  showOperations(filterOperation());
 });
 
-$selectCategory.addEventListener("change", (event) => {
-  const selection = event.target.value;
-
-  showOperations(filterByCategory(selection));
+$selectCategory.addEventListener("change", () => {
+ showOperations(filterOperation());
 });
 
-$inputFilterDate.addEventListener("change", (event) => {
-  const selection = event.target.value;
-  
-  showOperations(filterByDate(selection));
+$inputFilterDate.addEventListener("change", () => {
+  showOperations(filterOperation());
 });
 
-$selectOrder.addEventListener("change", (event) => {
-  const selection = event.target.value;
-
-  showOperations(filterByOrder(selection));
+$selectOrder.addEventListener("change", () => {
+  showOperations(filterOperation());
 });
