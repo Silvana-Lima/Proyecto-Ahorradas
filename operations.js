@@ -1,22 +1,5 @@
 // ****---- Variables ----****
 
-const $newOperationDescription = $("#description");
-const $newOperationAmount = $("#amount");
-const $newOperationInputDate = $("#new-operation-input-date")
-const $newOperationSelectType = $("#new-operation-select-type");
-const $btnAddNewOperation = $("#btn-add-new-operation");
-
-const $totalGananciasBalance = $(".total-ganancias-balance");
-const $totalGastosBalance = $(".total-gastos-balance");
-const $totalBalance = $(".total-balance");
-
-const $contWithoutResults = $(".cont-without-results");
-const $contOperations = $(".cont-operations");
-const $contTitleOperations = $(".cont-title-operations");
-
-const $inputFilterDate = $("#input-filter-date");
-
-
 let operationsLocalStorage = JSON.parse(
   localStorage.getItem("datosIngresados")
 );
@@ -32,44 +15,38 @@ let operacionIngresada = {
   id:"",
 };
 
-let moldebalance = {
-  ganancia: 0,
-  gasto: 0,
-  total: 0,
-};
-
 // ****---- Functions ----****
 
-let newBalance = {};
-let getBalance = (operations) => {
-  newBalance = { ...moldebalance };
-  let ganancia = 0;
-  let gasto = 0;
+let getBalance = () => {
+
+  let newBalance = {  
+    ganancia: 0,
+    gasto: 0,
+    total: 0
+  };
 
   for (const operation of operations) {
     if (operation.tipo === "ganancia") {
-      ganancia += operation.monto;
+      newBalance.ganancia += operation.monto;
     } else if (operation.tipo === "gasto") {
-      gasto += operation.monto;
+      newBalance.gasto += operation.monto;
     }
   }
 
-  newBalance.ganancia = ganancia;
-  newBalance.gasto = gasto;
-  newBalance.total = ganancia - gasto;
+  newBalance.total = newBalance.ganancia - newBalance.gasto;
 
   return newBalance;
 };
 
-getBalance(operations);
+getBalance();
 
-const showBalance = (newBalance) => {
-  $totalGananciasBalance.innerText = `+$${newBalance.ganancia}`;
-  $totalGastosBalance.innerText = `-$${newBalance.gasto}`;
-  $totalBalance.innerText = `$${newBalance.total}`;
+const showBalance = (balance) => {
+  $totalGananciasBalance.innerText = `+$${balance.ganancia}`;
+  $totalGastosBalance.innerText = `-$${balance.gasto}`;
+  $totalBalance.innerText = `$${balance.total}`;
 };
 
-showBalance(newBalance);
+showBalance(getBalance());
 
 const cleanerNewOperation = () => {
   $newOperationDescription.value = "";
@@ -110,9 +87,6 @@ const showOperations = (operations) => {
       
 };
 
-let $btnDeleteOperation = $(".eliminar");
-console.log($btnDeleteOperation);
-
 if (operations.length > 0) {
   $contOperations.classList.remove("is-hidden");
   $contTitleOperations.classList.remove("is-hidden");
@@ -148,8 +122,8 @@ $btnAddNewOperation.addEventListener("click", () => {
   operations.push(data);
   localStorage.setItem("datosIngresados", JSON.stringify(operations));
 
-  getBalance(operations);
-  showBalance(newBalance);
+  getBalance();
+  showBalance(getBalance());
   cleanerNewOperation();
   showOperations(operations);
   $sectionNewOperation.classList.add("is-hidden");

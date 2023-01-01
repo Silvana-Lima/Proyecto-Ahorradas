@@ -1,7 +1,4 @@
-const $btnAddCategory = $("#btn-add-category");
-const $inputCategory = $(".input-category");
-const $newOperationSelectCategory = $("#new-operation-select-category");
-const $contCategories = $(".cont-category");
+// ****---- Variables ----****
 
 let categoriesLocalStorage = JSON.parse(localStorage.getItem("categorias"));
 
