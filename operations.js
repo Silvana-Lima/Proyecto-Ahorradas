@@ -17,7 +17,7 @@ let operacionIngresada = {
 
 // ****---- Functions ----****
 
-let getBalance = () => {
+let getBalance = (operations) => {
 
   let newBalance = {  
     ganancia: 0,
@@ -38,15 +38,11 @@ let getBalance = () => {
   return newBalance;
 };
 
-getBalance();
-
 const showBalance = (balance) => {
   $totalGananciasBalance.innerText = `+$${balance.ganancia}`;
   $totalGastosBalance.innerText = `-$${balance.gasto}`;
   $totalBalance.innerText = `$${balance.total}`;
 };
-
-showBalance(getBalance());
 
 const cleanerNewOperation = () => {
   $newOperationDescription.value = "";
@@ -56,7 +52,7 @@ const cleanerNewOperation = () => {
 };
 
 const removeOperation = (id)=>{
-  
+  event.preventDefault()
   console.log(id);
  
 }
@@ -122,7 +118,6 @@ $btnAddNewOperation.addEventListener("click", () => {
   operations.push(data);
   localStorage.setItem("datosIngresados", JSON.stringify(operations));
 
-  getBalance();
   showBalance(getBalance());
   cleanerNewOperation();
   showOperations(operations);

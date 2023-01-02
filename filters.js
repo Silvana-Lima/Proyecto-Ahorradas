@@ -95,16 +95,22 @@ $btnHideFilters.addEventListener("click", (event)=>{
 
 $selectType.addEventListener("change", () => {
   showOperations(filterOperation());
+  showBalance(getBalance(filterOperation()));
 });
 
 $selectCategory.addEventListener("change", () => {
  showOperations(filterOperation());
+ showBalance(getBalance(filterOperation()));
 });
 
 $inputFilterDate.addEventListener("change", () => {
   showOperations(filterOperation());
+  showBalance(getBalance(filterOperation()));
 });
 
 $selectOrder.addEventListener("change", () => {
   showOperations(filterOperation());
+  showBalance(getBalance(filterOperation()));
 });
+
+showBalance(getBalance(filterOperation()));
