@@ -113,12 +113,12 @@ const showReports = () => {
 $contSummary.innerHTML =`<div class="columns is-mobile">
 <div class="column has-text-weight-bold ">Categoría con mayor ganancia</div>
 <div class="column has-text-right"><p class="tag has-text-primary has-background-primary-light">${mayorGanancia.nombre}</p></div>
-<div class="column has-text-right">+$${mayorGanancia.ganancia}</div>
+<div class="column has-text-right has-text-primary">+$${mayorGanancia.ganancia}</div>
 </div>
 <div class="columns is-mobile">
     <div class="column has-text-weight-bold ">Categoría con mayor gasto</div>
     <div class="column has-text-right"><p class="tag has-text-primary has-background-primary-light">${mayorGasto.nombre}</p></div>
-    <div class="column has-text-right">$${mayorGasto.gasto}</div>
+    <div class="column has-text-right has-text-danger">$${mayorGasto.gasto}</div>
 </div>
 <div class="columns is-mobile">
     <div class="column has-text-weight-bold ">Categoría con mayor balance</div>
@@ -128,12 +128,12 @@ $contSummary.innerHTML =`<div class="columns is-mobile">
 <div class="columns is-mobile">
     <div class="column has-text-weight-bold ">Mes con mayor ganancia</div>
     <div class="column has-text-right"></div>
-    <div class="column has-text-right"></div>
+    <div class="column has-text-right has-text-primary"></div>
 </div>
 <div class="columns is-mobile mb-5">
     <div class="column has-text-weight-bold ">Mes con mayor gasto</div>
     <div class="column has-text-right"></div>
-    <div class="column has-text-right"></div>
+    <div class="column has-text-right has-text-danger"></div>
 </div>`
 
   for (const {nombre, ganancia, gasto, balance} of arrayCategorias) {

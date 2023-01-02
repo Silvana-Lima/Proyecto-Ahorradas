@@ -51,11 +51,11 @@ const cleanerNewOperation = () => {
   $newOperationSelectCategory.value = "Comida";
 };
 
-const removeOperation = (id)=>{
-  event.preventDefault()
-  console.log(id);
+// const removeOperation = (id)=>{
+//   event.preventDefault()
+//   console.log(id);
  
-}
+// }
 
 const showOperations = (operations) => {
   $contOperations.innerHTML = "";
@@ -78,9 +78,9 @@ const showOperations = (operations) => {
                     <a href="" class="eliminar" onclick="removeOperation(${id})" id="btn-delete-operation">Eliminar</a>
                   </div>
                 </div> <hr class="is-hidden-desktop">`;
-
+                 
     }
-      
+
 };
 
 if (operations.length > 0) {

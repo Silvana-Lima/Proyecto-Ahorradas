@@ -35,38 +35,46 @@ function convertirFecha (fechaString) {
 const filterByDate = (filter, operations)=> date = operations.filter((operation) => operation.fecha >= filter)
 
 const filterByOrder = (filter, operations) => {
-  let arrayOrdenado = [];
+  let sortedOperations = [];
   switch (filter) {
     case "mas reciente":
-      arrayOrdenado = operations.sort(
+      sortedOperations = operations.sort(
         (a, b) => convertirFecha(b.fecha) - convertirFecha(a.fecha)
       );
       break;
 
     case "menos reciente":
-      arrayOrdenado = operations.sort(
+      sortedOperations = operations.sort(
         (a, b) => convertirFecha(a.fecha) - convertirFecha(b.fecha)
       );
       break;
 
     case "menor monto":
-      arrayOrdenado = operations.sort((a, b) => a.monto - b.monto);
+      sortedOperations = operations.sort((a, b) => a.monto - b.monto);
       break;
 
     case "mayor monto":
-      arrayOrdenado = operations.sort((a, b) => b.monto - a.monto);
+      sortedOperations = operations.sort((a, b) => b.monto - a.monto);
       break;
 
-    // case "a/z":
-    //   arrayOrdenado = operations.sort(operation.descripcion); //error
-    //   break;
+    case "a/z":
+      sortedOperations = operations.sort(function(a, b){
+        if(a.descripcion.toLowerCase() < b.descripcion.toLowerCase()) { return -1; }
+        if(a.descripcion.toLowerCase() > b.descripcion.toLowerCase()) { return 1; }
+        return 0;
+    })
+      break;
 
-    // case "z/a":
-    //   arrayOrdenado = operations.sort((a, b) => b.descripcion - a.descripcion); //error
-    //   break;
+    case "z/a":
+      sortedOperations = operations.sort(function(a, b){
+        if(a.descripcion.toLowerCase() < b.descripcion.toLowerCase()) { return 1; }
+        if(a.descripcion.toLowerCase() > b.descripcion.toLowerCase()) { return -1; }
+        return 0;
+    })
+      break;
   }
 
-  return arrayOrdenado;
+  return sortedOperations;
 };
 
 let filterOperation = ()=>{
