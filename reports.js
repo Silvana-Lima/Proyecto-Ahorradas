@@ -98,7 +98,6 @@ for (const {fecha, tipo, monto} of operations) {
 
 }
 
-console.log(array);
 }
 
 

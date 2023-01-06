@@ -8,7 +8,9 @@ const $$ = (selector)=> document.querySelectorAll(selector);
 
 const $sectionBalance = $(".section-balance");
 const $sectionNewOperation = $(".section-new-operation");
+const $sectionEditOperatioin = $(".section-edit-operation");
 const $btnNewOperation = $("#btn-new-operation");
+const $formNewOperation = $(".form-new-operation");
 const $btnCancelNewOperation = $("#btn-cancel-new-operation");
 const $btnBalance = $("#btn-balance");
 const $btnCategory = $("#btn-category");

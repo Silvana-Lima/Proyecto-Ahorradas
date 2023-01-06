@@ -43,33 +43,84 @@ const cleanerNewOperation = () => {
 };
 
 const removeOperation = (id) => {
-  
- // operations = (id) => operations.filter((operation) => operation.id !== id);
-console.log(id);
+   operations = operations.filter((operation) => operation.id !== id);
+   localStorage.setItem("datosIngresados", JSON.stringify(operations));
+
+   showOperations(operations)
 };
 
 const showOperations = (operations) => {
   $contOperations.innerHTML = "";
   for (const { descripcion, monto, categoria, fecha, id } of operations) {
-    $contOperations.innerHTML += `<div class="columns is-mobile">
-                  <div class="column">
-                    <p class="item-operations-description">${descripcion}</p>
-                  </div>
-                  <div class="column">
-                    <p class="tag item-operations-category has-text-primary has-background-primary-light">${categoria}</p>
-                  </div>
-                  <div class="column">
-                    <p class="item-operations-date is-hidden-mobile">${fecha}</p>
-                  </div>
-                  <div class="column">
-                    <p class="item-operations-amount has-text-weight-bold">$${monto}</p>
-                  </div>
-                  <div class="column">
-                    <button class="button is-ghost editar mr-3">Editar</button>
-                    <button class="button is-ghost eliminar" onclick="function () {removeOperation(${id})}" id="btn-delete-operation">Eliminar</button>
-                  </div>
-                </div> <hr class="is-hidden-desktop">`;
-                 
+    // $contOperations.innerHTML += `<div class="columns is-mobile">
+    //               <div class="column">
+    //                 <p class="item-operations-description">${descripcion}</p>
+    //               </div>
+    //               <div class="column">
+    //                 <p class="tag item-operations-category has-text-primary has-background-primary-light">${categoria}</p>
+    //               </div>
+    //               <div class="column">
+    //                 <p class="item-operations-date is-hidden-mobile">${fecha}</p>
+    //               </div>
+    //               <div class="column">
+    //                 <p class="item-operations-amount has-text-weight-bold">$${monto}</p>
+    //               </div>
+    //               <div class="column">
+    //                 <button class="button is-ghost editar mr-3">Editar</button>
+    //                 <button class="button is-ghost eliminar" onclick="function () {removeOperation(${id})}" id="btn-delete-operation">Eliminar</button>
+    //               </div>
+    //             </div> <hr class="is-hidden-desktop">`;
+
+    let divColumns = document.createElement("div");
+    divColumns.classList.add("columns");
+
+    let divColumn = document.createElement("div");
+    divColumn.classList.add("column");
+    divColumn.textContent = descripcion;
+    divColumns.appendChild(divColumn);
+
+    divColumn = document.createElement("div");
+    divColumn.classList.add("column");
+    divColumn.classList.add("tag");
+    divColumn.classList.add("has-text-primary");
+    divColumn.classList.add("has-background-primary-light");
+    divColumn.textContent = categoria;
+    divColumns.appendChild(divColumn);
+
+    divColumn = document.createElement("div");
+    divColumn.classList.add("column");
+    divColumn.textContent = fecha;
+    divColumns.appendChild(divColumn);
+
+    divColumn = document.createElement("div");
+    divColumn.classList.add("column");
+    divColumn.textContent = monto;
+    divColumns.appendChild(divColumn);
+
+    divColumn = document.createElement("div");
+    divColumn.classList.add("column");
+    divColumn.classList.add("is-flex");
+    let button = document.createElement("button");
+    button.classList.add("button");
+    button.classList.add("is-ghost");
+    button.innerText = "eliminar";
+    button.onclick = function () {
+      removeOperation(id);
+    };
+    divColumn.appendChild(button)
+
+    button = document.createElement("button");
+    button.classList.add("button");
+    button.classList.add("is-ghost");
+    button.innerText = "editar";
+    button.onclick = function () {
+      editOperation(id);
+    };
+    divColumn.appendChild(button)
+
+    divColumns.appendChild(divColumn);
+  
+    $contOperations.appendChild(divColumns);
     }
 
 };
@@ -96,7 +147,9 @@ window.onload = function(){
 
 // ****---- Events ----****
 
-$btnAddNewOperation.addEventListener("click", () => {
+$formNewOperation.addEventListener("submit", (event) => {
+
+  event.preventDefault()
   const data = { 
     descripcion: $newOperationDescription.value,
     monto: Number($newOperationAmount.value),
