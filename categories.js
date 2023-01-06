@@ -2,7 +2,7 @@
 
 let categoriesLocalStorage = JSON.parse(localStorage.getItem("categorias"));
 
-let category = categoriesLocalStorage || [{
+let categories = categoriesLocalStorage || [{
     nombre: "Comida",
     id:"comida"
 },
@@ -28,30 +28,31 @@ let category = categoriesLocalStorage || [{
 },
 ];
 
-let enteredCategory = {
-    nombre: "",
-    id:""
-}
-
 $btnAddCategory.addEventListener("click", (event)=>{
     event.preventDefault()
 
-    const newCategory = {...enteredCategory};
+    const newCategory = {
+        nombre: $inputCategory.value,
+        id: uuid.v1()
+    };
 
-    newCategory.nombre = $inputCategory.value;
-    newCategory.id = uuid.v1();
+    categories.push(newCategory);
 
-    category.push(newCategory);
-
-    localStorage.setItem("categorias", JSON.stringify(category));
-    showCategory(category);
+    localStorage.setItem("categorias", JSON.stringify(categories));
+    showCategory(categories);
 })
 
-const removeCategory = (id)=>{
-    event.preventDefault();
-     console.log(id);
+ 
+ const removeCategory = (id) => {
+   // event.preventDefault()
+    //categories = (id) => categories.filter((category) => category.id !== id);
+  console.log(id);
+  };
 
-  }
+const editCategory = (id)=>{
+   
+ 
+}
 
 const showCategory = (categories)=>{
     $newOperationSelectCategory.innerHTML= "";
@@ -66,9 +67,9 @@ const showCategory = (categories)=>{
         $contCategories.innerHTML += `<div class="columns is-mobile columns-categories">
         <div class="column is-three-quarters-desktop is-half-mobile">${nombre}
         </div>
-        <div class="column"><a href="" class="mr-3">Editar</a> <a href="" class="btn-category-delete" onclick="removeCategory(${id})">Eliminar</a></div></div>`
+        <div class="column"><button class="button is-ghost mr-3" onclick="function(){editCategory(${id})}">Editar</button> <button class="button is-ghost btn-category-delete" onclick="function(){removeCategory(${id})}">Eliminar</button></div></div>`
     }
 }
 
-showCategory(category);
+showCategory(categories); 
 

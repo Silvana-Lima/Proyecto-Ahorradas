@@ -32,7 +32,7 @@ let getTotalsByCategory = (categorias) => {
 };
 
 const categMayorGanancia = () => {
-  let categGanancias = getTotalsByCategory(category);
+  let categGanancias = getTotalsByCategory(categories);
 
   let categoriaMayorGanancia = {
     nombre: "",
@@ -50,7 +50,7 @@ const categMayorGanancia = () => {
 };
 
 const categMayorGasto = ()=>{
-    let categGastos = getTotalsByCategory(category);
+    let categGastos = getTotalsByCategory(categories);
 
   let categoriaMayorGasto = {
     nombre: "",
@@ -68,7 +68,7 @@ const categMayorGasto = ()=>{
 }
 
 const catMayorBalance = ()=>{
-  let categBalance = getTotalsByCategory(category);
+  let categBalance = getTotalsByCategory(categories);
 
   let categoriaMayorBalance = {
     nombre: "",
@@ -108,7 +108,7 @@ const showReports = () => {
   let mayorGanancia = categMayorGanancia();
   let mayorGasto = categMayorGasto();
   let mayorBalance = catMayorBalance();
-  let arrayCategorias = getTotalsByCategory(category);
+  let arrayCategorias = getTotalsByCategory(categories);
 
 $contSummary.innerHTML =`<div class="columns is-mobile">
 <div class="column has-text-weight-bold ">Categoría con mayor ganancia</div>

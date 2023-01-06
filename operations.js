@@ -6,15 +6,6 @@ let operationsLocalStorage = JSON.parse(
 
 let operations = operationsLocalStorage || [];
 
-let operacionIngresada = {
-  descripcion: "",
-  monto: 0,
-  tipo: "",
-  categoria: "",
-  fecha: "",
-  id:"",
-};
-
 // ****---- Functions ----****
 
 let getBalance = (operations) => {
@@ -51,11 +42,11 @@ const cleanerNewOperation = () => {
   $newOperationSelectCategory.value = "Comida";
 };
 
-// const removeOperation = (id)=>{
-//   event.preventDefault()
-//   console.log(id);
- 
-// }
+const removeOperation = (id) => {
+  
+ // operations = (id) => operations.filter((operation) => operation.id !== id);
+console.log(id);
+};
 
 const showOperations = (operations) => {
   $contOperations.innerHTML = "";
@@ -74,8 +65,8 @@ const showOperations = (operations) => {
                     <p class="item-operations-amount has-text-weight-bold">$${monto}</p>
                   </div>
                   <div class="column">
-                    <a href="" class="editar mr-3">Editar</a>
-                    <a href="" class="eliminar" onclick="removeOperation(${id})" id="btn-delete-operation">Eliminar</a>
+                    <button class="button is-ghost editar mr-3">Editar</button>
+                    <button class="button is-ghost eliminar" onclick="function () {removeOperation(${id})}" id="btn-delete-operation">Eliminar</button>
                   </div>
                 </div> <hr class="is-hidden-desktop">`;
                  
@@ -106,19 +97,19 @@ window.onload = function(){
 // ****---- Events ----****
 
 $btnAddNewOperation.addEventListener("click", () => {
-  const data = { ...operacionIngresada };
-
-  data.descripcion = $newOperationDescription.value;
-  data.monto = Number($newOperationAmount.value);
-  data.tipo = $newOperationSelectType.value;
-  data.categoria = $newOperationSelectCategory.value;
-  data.fecha = $newOperationInputDate.value;
-  data.id = uuid.v1();
+  const data = { 
+    descripcion: $newOperationDescription.value,
+    monto: Number($newOperationAmount.value),
+    tipo: $newOperationSelectType.value,
+    categoria: $newOperationSelectCategory.value,
+    fecha: $newOperationInputDate.value,
+    id: uuid.v1()
+   };
 
   operations.push(data);
   localStorage.setItem("datosIngresados", JSON.stringify(operations));
 
-  showBalance(getBalance());
+  showBalance(getBalance(operations));
   cleanerNewOperation();
   showOperations(operations);
   $sectionNewOperation.classList.add("is-hidden");
