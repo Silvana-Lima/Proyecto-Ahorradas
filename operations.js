@@ -49,6 +49,22 @@ const removeOperation = (id) => {
    showOperations(operations)
 };
 
+let operationSelected; 
+
+const editOperation = (id) => {
+  $sectionBalance.classList.add("is-hidden");
+  $sectionEditOperatioin.classList.remove("is-hidden");
+
+  operationSelected = operations.find((operation) => operation.id === id);
+
+  $inputEditDescription.value = operationSelected["descripcion"];
+  $inputEditAmount.value = operationSelected["monto"];
+  $selectTypeEdit.value = operationSelected["tipo"];
+  $inputEditDate.value = operationSelected["fecha"];
+  $inputEditCategory.value = operationSelected["categoria"];
+};
+
+
 const showOperations = (operations) => {
   $contOperations.innerHTML = "";
   for (const { descripcion, monto, categoria, fecha, id } of operations) {
@@ -80,10 +96,7 @@ const showOperations = (operations) => {
     divColumns.appendChild(divColumn);
 
     divColumn = document.createElement("div");
-    divColumn.classList.add("column");
-    divColumn.classList.add("tag");
-    divColumn.classList.add("has-text-primary");
-    divColumn.classList.add("has-background-primary-light");
+    divColumn.classList.add("column", "tag", "has-text-primary", "has-background-primary-light");
     divColumn.textContent = categoria;
     divColumns.appendChild(divColumn);
 
@@ -98,11 +111,9 @@ const showOperations = (operations) => {
     divColumns.appendChild(divColumn);
 
     divColumn = document.createElement("div");
-    divColumn.classList.add("column");
-    divColumn.classList.add("is-flex");
+    divColumn.classList.add("column", "is-flex");
     let button = document.createElement("button");
-    button.classList.add("button");
-    button.classList.add("is-ghost");
+    button.classList.add("button", "is-ghost");
     button.innerText = "eliminar";
     button.onclick = function () {
       removeOperation(id);
@@ -110,8 +121,7 @@ const showOperations = (operations) => {
     divColumn.appendChild(button)
 
     button = document.createElement("button");
-    button.classList.add("button");
-    button.classList.add("is-ghost");
+    button.classList.add("button", "is-ghost");
     button.innerText = "editar";
     button.onclick = function () {
       editOperation(id);
@@ -171,3 +181,33 @@ $formNewOperation.addEventListener("submit", (event) => {
   $contWithoutResults.classList.add("is-hidden");
   $contTitleOperations.classList.remove("is-hidden");
 });
+
+$btnCancelEditOperation.addEventListener("click", ()=>{
+  $sectionBalance.classList.remove("is-hidden");
+  $sectionEditOperatioin.classList.add("is-hidden");
+})
+
+$formEditOperation.addEventListener("submit", (e)=>{
+  e.preventDefault();
+  $sectionBalance.classList.remove("is-hidden");
+  $sectionEditOperatioin.classList.add("is-hidden");
+
+  operations = operations.map((operation)=>{
+    if (operation.id === operationSelected.id){
+
+    operation.descripcion = $inputEditDescription.value;
+    operation.monto = Number($inputEditAmount.value);
+    operation.tipo = $selectTypeEdit.value;
+    operation.fecha = $inputEditDate.value;
+    operation.categoria = $inputEditCategory.value;
+
+    }
+    return operation; 
+  })
+console.log(operations);
+
+showOperations(operations);
+localStorage.setItem("datosIngresados", JSON.stringify(operations));
+
+operationSelected = null;
+})

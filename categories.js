@@ -60,14 +60,15 @@ const showCategory = (categories)=>{
     $contCategories.innerHTML="";
 
     for (const {nombre, id} of categories) {
-        $newOperationSelectCategory.innerHTML += `<option value="${nombre}" id="${id}">${nombre}</option>`
+        $newOperationSelectCategory.innerHTML += `<option value="${nombre}" id="${id}">${nombre}</option>`;
+        $inputEditCategory.innerHTML += `<option value="${nombre}" id="${id}">${nombre}</option>`
 
         $selectCategory.innerHTML += `<option value="${nombre}" id="${id}">${nombre}</option>`
 
         $contCategories.innerHTML += `<div class="columns is-mobile columns-categories">
         <div class="column is-three-quarters-desktop is-half-mobile">${nombre}
         </div>
-        <div class="column"><button class="button is-ghost mr-3" onclick="function(){editCategory(${id})}">Editar</button> <button class="button is-ghost btn-category-delete" onclick="function(){removeCategory(${id})}">Eliminar</button></div></div>`
+        <div class="column is-flex"><button class="button is-ghost mr-3" onclick="function(){editCategory(${id})}">Editar</button> <button class="button is-ghost btn-category-delete" onclick="function(){removeCategory(${id})}">Eliminar</button></div></div>`
     }
 }
 

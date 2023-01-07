@@ -45,6 +45,15 @@ const $inputCategory = $(".input-category");
 const $newOperationSelectCategory = $("#new-operation-select-category");
 const $contCategories = $(".cont-category");
 
+const $inputEditDescription = $("#edit-description");
+const $inputEditAmount = $("#edit-amount");
+const $selectTypeEdit = $("#edit-operation-select-type");
+const $inputEditDate = $("#edit-operation-input-date");
+const $inputEditCategory = $("#edit-operation-select-category");
+const $btnCancelEditOperation = $("#btn-cancel-edit-operation");
+const $formEditOperation = $(".form-edit-operation");
+const $btnEditOperation = $("#btn-add-edit-operation")
+
 const $$sections = $$(".section");
 
 
