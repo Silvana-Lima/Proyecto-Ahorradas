@@ -61,7 +61,7 @@ const editOperation = (id) => {
   $inputEditAmount.value = operationSelected["monto"];
   $selectTypeEdit.value = operationSelected["tipo"];
   $inputEditDate.value = operationSelected["fecha"];
-  $inputEditCategory.value = operationSelected["categoria"];
+  $inputEditCategoryOperation.value = operationSelected["categoria"];
 };
 
 

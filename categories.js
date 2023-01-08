@@ -2,75 +2,143 @@
 
 let categoriesLocalStorage = JSON.parse(localStorage.getItem("categorias"));
 
-let categories = categoriesLocalStorage || [{
+let categories = categoriesLocalStorage || [
+  {
     nombre: "Comida",
-    id:"comida"
-},
-{
+    id: "comida",
+  },
+  {
     nombre: "Servicios",
-    id:"servicios"
-},
-{
+    id: "servicios",
+  },
+  {
     nombre: "Salidas",
-    id: "salidas"
-},
-{
+    id: "salidas",
+  },
+  {
     nombre: "Educación",
-    id:"educacion"
-},
-{
+    id: "educacion",
+  },
+  {
     nombre: "Transporte",
-    id:"transporte"
-},
-{
+    id: "transporte",
+  },
+  {
     nombre: "Trabajo",
-    id:"trabajo"
-},
+    id: "trabajo",
+  },
 ];
 
-$btnAddCategory.addEventListener("click", (event)=>{
-    event.preventDefault()
+let categorySelected;
 
-    const newCategory = {
-        nombre: $inputCategory.value,
-        id: uuid.v1()
+// ****---- Functions ----****
+
+const removeCategory = (id) => {
+  categories = categories.filter((category) => category.id !== id);
+  console.log(id);
+
+  localStorage.setItem("categorias", JSON.stringify(categories));
+  showCategory(categories);
+};
+
+const editCategory = (id) => {
+    event.preventDefault();
+
+    $boxAddCategorie.classList.add("is-hidden");
+    $boxEditCategorie.classList.remove("is-hidden");
+
+    categorySelected = categories.find((category) => category.id === id);
+
+    $inputEditCategory.value = categorySelected["nombre"];
+};
+
+const showCategory = (categories) => {
+  $newOperationSelectCategory.innerHTML = "";
+  $selectCategory.innerHTML = `<option value="todas">Todas</option>`;
+
+  const divContainer = document.createElement("div");
+
+  $contCategories.innerHTML = "";
+
+  for (const { nombre, id } of categories) {
+    $newOperationSelectCategory.innerHTML += `<option value="${nombre}" id="${id}">${nombre}</option>`;
+    $inputEditCategory.innerHTML += `<option value="${nombre}" id="${id}">${nombre}</option>`;
+
+    $selectCategory.innerHTML += `<option value="${nombre}" id="${id}">${nombre}</option>`;
+
+    divContainer.innerHTML += `<div class="columns is-mobile columns-categories">
+         <div class="column is-three-quarters-desktop is-half-mobile">
+         <p>${nombre}</p>
+         </div>
+         <div class="column is-flex">
+         <button class="button is-ghost btn-category-edit mr-3" id="${id}">Editar</button>
+         <button class="button is-ghost btn-category-delete" id="${id}">Eliminar</button>
+         </div>
+         </div>`;
+  }
+
+  const buttonsDelete = divContainer.querySelectorAll(".btn-category-delete");
+
+  for (const button of buttonsDelete) {
+    button.onclick = () => {
+      removeCategory(button.id);
     };
+  }
 
+  const buttonsEdit = divContainer.querySelectorAll(".btn-category-edit");
+
+  for (const button of buttonsEdit) {
+    button.onclick = () => {
+      editCategory(button.id);
+    };
+  }
+
+
+  $contCategories.append(divContainer);
+};
+
+showCategory(categories);
+
+// ****---- Events ----****
+
+$btnAddCategory.addEventListener("click", (event) => {
+    event.preventDefault();
+  
+    const newCategory = {
+      nombre: $inputCategory.value,
+      id: uuid.v1(),
+    };
+  
     categories.push(newCategory);
+  
+    localStorage.setItem("categorias", JSON.stringify(categories));
+    showCategory(categories);
+  });
+
+  $btnCancelEditCategory.addEventListener("click", (e)=>{
+    e.preventDefault();
+
+    $boxAddCategorie.classList.remove("is-hidden");
+    $boxEditCategorie.classList.add("is-hidden");
+  });
+
+  $formEditCategorie.addEventListener("submit", (e)=>{
+    e.preventDefault();
+
+    $boxAddCategorie.classList.remove("is-hidden");
+    $boxEditCategorie.classList.add("is-hidden");
+
+    categories = categories.map((category)=>{
+       if (category.id === categorySelected.id) {
+        category.nombre = $inputEditCategory.value;
+       }
+
+       return category;
+    })
 
     localStorage.setItem("categorias", JSON.stringify(categories));
     showCategory(categories);
-})
 
- 
- const removeCategory = (id) => {
-   // event.preventDefault()
-    //categories = (id) => categories.filter((category) => category.id !== id);
-  console.log(id);
-  };
+    categorySelected = null;
 
-const editCategory = (id)=>{
-   
- 
-}
-
-const showCategory = (categories)=>{
-    $newOperationSelectCategory.innerHTML= "";
-    $selectCategory.innerHTML=`<option value="todas">Todas</option>`;
-    $contCategories.innerHTML="";
-
-    for (const {nombre, id} of categories) {
-        $newOperationSelectCategory.innerHTML += `<option value="${nombre}" id="${id}">${nombre}</option>`;
-        $inputEditCategory.innerHTML += `<option value="${nombre}" id="${id}">${nombre}</option>`
-
-        $selectCategory.innerHTML += `<option value="${nombre}" id="${id}">${nombre}</option>`
-
-        $contCategories.innerHTML += `<div class="columns is-mobile columns-categories">
-        <div class="column is-three-quarters-desktop is-half-mobile">${nombre}
-        </div>
-        <div class="column is-flex"><button class="button is-ghost mr-3" onclick="function(){editCategory(${id})}">Editar</button> <button class="button is-ghost btn-category-delete" onclick="function(){removeCategory(${id})}">Eliminar</button></div></div>`
-    }
-}
-
-showCategory(categories); 
-
+  })
