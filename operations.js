@@ -70,23 +70,23 @@ const showOperations = (operations) => {
 
   const divContainer = document.createElement("div");
 
-  for (const { descripcion, monto, categoria, fecha, id } of operations) {
-    divContainer.innerHTML += `<div class="columns is-mobile">
-                  <div class="column">
+  for (const { descripcion, monto, categoria, fecha, tipo, id } of operations) {
+    divContainer.innerHTML += `<div class="columns is-mobile is-multiline">
+                  <div class="column is-two-fifths-mobile">
                     <p class="item-operations-description">${descripcion}</p>
                   </div>
-                  <div class="column">
+                  <div class="column is-three-fifths-mobile has-text-right-mobile">
                     <p class="tag item-operations-category has-text-primary has-background-primary-light">${categoria}</p>
                   </div>
-                  <div class="column">
-                    <p class="item-operations-date is-hidden-mobile">${fecha}</p>
+                  <div class="column is-hidden-mobile">
+                    <p class="item-operations-date">${fecha}</p>
                   </div>
-                  <div class="column">
-                    <p class="item-operations-amount has-text-weight-bold">$${monto}</p>
+                  <div class="column is-two-fifths-mobile">
+                    <p class="item-operations-amount has-text-weight-bold ${tipo == "ganancia" ? "has-text-primary" : "has-text-danger"}">$${monto}</p>
                   </div>
-                  <div class="column is-flex">
-                    <button class="button is-ghost btn-operation-edit" id="${id}">Editar</button>
-                    <button class="button is-ghost btn-operation-delete"  id="${id}">Eliminar</button>
+                  <div class="column is-three-fifths-mobile has-text-right-mobile">
+                    <button class="button is-ghost is-small btn-operation-edit" id="${id}">Editar</button>
+                    <button class="button is-ghost is-small btn-operation-delete"  id="${id}">Eliminar</button>
                   </div>
                 </div> <hr class="is-hidden-desktop">`;
 
@@ -187,4 +187,9 @@ showOperations(operations);
 localStorage.setItem("datosIngresados", JSON.stringify(operations));
 
 operationSelected = null;
+});
+
+$btnCancelNewOperation.addEventListener("click", (e)=>{
+  e.preventDefault();
+  changeScreen($$sections, $sectionBalance);
 })

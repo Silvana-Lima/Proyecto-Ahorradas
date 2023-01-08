@@ -99,10 +99,6 @@ $btnNewOperation.addEventListener("click", ()=>{
     changeScreen($$sections, $sectionNewOperation);
 })
 
-$btnCancelNewOperation.addEventListener("click", ()=>{
-    changeScreen($$sections, $sectionBalance);
-})
-
 // ****---- Event to active NavBurger Bulma ----****
 
 $btnNavBarBurger.addEventListener("click", ()=> {

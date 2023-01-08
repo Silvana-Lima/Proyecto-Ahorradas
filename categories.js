@@ -67,12 +67,12 @@ const showCategory = (categories) => {
     $selectCategory.innerHTML += `<option value="${nombre}" id="${id}">${nombre}</option>`;
 
     divContainer.innerHTML += `<div class="columns is-mobile columns-categories">
-         <div class="column is-three-quarters-desktop is-half-mobile">
+         <div class="column">
          <p>${nombre}</p>
          </div>
-         <div class="column is-flex">
-         <button class="button is-ghost btn-category-edit mr-3" id="${id}">Editar</button>
-         <button class="button is-ghost btn-category-delete" id="${id}">Eliminar</button>
+         <div class="column has-text-right is-three-fifths-mobile">
+         <button class="button is-ghost is-small btn-category-edit" id="${id}">Editar</button>
+         <button class="button is-ghost is-small btn-category-delete" id="${id}">Eliminar</button>
          </div>
          </div>`;
   }

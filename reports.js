@@ -112,27 +112,27 @@ const showReports = () => {
 $contSummary.innerHTML =`<div class="columns is-mobile">
 <div class="column has-text-weight-bold ">Categoría con mayor ganancia</div>
 <div class="column has-text-right"><p class="tag has-text-primary has-background-primary-light">${mayorGanancia.nombre}</p></div>
-<div class="column has-text-right has-text-primary">+$${mayorGanancia.ganancia}</div>
+<div class="column has-text-right has-text-primary has-text-weight-bold">+$${mayorGanancia.ganancia}</div>
 </div>
 <div class="columns is-mobile">
     <div class="column has-text-weight-bold ">Categoría con mayor gasto</div>
     <div class="column has-text-right"><p class="tag has-text-primary has-background-primary-light">${mayorGasto.nombre}</p></div>
-    <div class="column has-text-right has-text-danger">$${mayorGasto.gasto}</div>
+    <div class="column has-text-right has-text-danger has-text-weight-bold">$${mayorGasto.gasto}</div>
 </div>
 <div class="columns is-mobile">
     <div class="column has-text-weight-bold ">Categoría con mayor balance</div>
     <div class="column has-text-right"><p class="tag has-text-primary has-background-primary-light">${mayorBalance.nombre}</p></div>
-    <div class="column has-text-right">$${mayorBalance.balance}</div>
+    <div class="column has-text-right has-text-weight-bold">$${mayorBalance.balance}</div>
 </div>
 <div class="columns is-mobile">
     <div class="column has-text-weight-bold ">Mes con mayor ganancia</div>
     <div class="column has-text-right"></div>
-    <div class="column has-text-right has-text-primary"></div>
+    <div class="column has-text-right has-text-primary has-text-weight-bold"></div>
 </div>
 <div class="columns is-mobile mb-5">
     <div class="column has-text-weight-bold ">Mes con mayor gasto</div>
     <div class="column has-text-right"></div>
-    <div class="column has-text-right has-text-danger"></div>
+    <div class="column has-text-right has-text-danger has-text-weight-bold"></div>
 </div>`
 
   for (const {nombre, ganancia, gasto, balance} of arrayCategorias) {
