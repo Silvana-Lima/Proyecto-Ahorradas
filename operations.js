@@ -67,72 +67,49 @@ const editOperation = (id) => {
 
 const showOperations = (operations) => {
   $contOperations.innerHTML = "";
+
+  const divContainer = document.createElement("div");
+
   for (const { descripcion, monto, categoria, fecha, id } of operations) {
-    // $contOperations.innerHTML += `<div class="columns is-mobile">
-    //               <div class="column">
-    //                 <p class="item-operations-description">${descripcion}</p>
-    //               </div>
-    //               <div class="column">
-    //                 <p class="tag item-operations-category has-text-primary has-background-primary-light">${categoria}</p>
-    //               </div>
-    //               <div class="column">
-    //                 <p class="item-operations-date is-hidden-mobile">${fecha}</p>
-    //               </div>
-    //               <div class="column">
-    //                 <p class="item-operations-amount has-text-weight-bold">$${monto}</p>
-    //               </div>
-    //               <div class="column">
-    //                 <button class="button is-ghost editar mr-3">Editar</button>
-    //                 <button class="button is-ghost eliminar" onclick="function () {removeOperation(${id})}" id="btn-delete-operation">Eliminar</button>
-    //               </div>
-    //             </div> <hr class="is-hidden-desktop">`;
+    divContainer.innerHTML += `<div class="columns is-mobile">
+                  <div class="column">
+                    <p class="item-operations-description">${descripcion}</p>
+                  </div>
+                  <div class="column">
+                    <p class="tag item-operations-category has-text-primary has-background-primary-light">${categoria}</p>
+                  </div>
+                  <div class="column">
+                    <p class="item-operations-date is-hidden-mobile">${fecha}</p>
+                  </div>
+                  <div class="column">
+                    <p class="item-operations-amount has-text-weight-bold">$${monto}</p>
+                  </div>
+                  <div class="column is-flex">
+                    <button class="button is-ghost btn-operation-edit" id="${id}">Editar</button>
+                    <button class="button is-ghost btn-operation-delete"  id="${id}">Eliminar</button>
+                  </div>
+                </div> <hr class="is-hidden-desktop">`;
 
-    let divColumns = document.createElement("div");
-    divColumns.classList.add("columns");
+    const buttonsDelete = divContainer.querySelectorAll(
+      ".btn-operation-delete"
+    );
 
-    let divColumn = document.createElement("div");
-    divColumn.classList.add("column");
-    divColumn.textContent = descripcion;
-    divColumns.appendChild(divColumn);
-
-    divColumn = document.createElement("div");
-    divColumn.classList.add("column", "tag", "has-text-primary", "has-background-primary-light");
-    divColumn.textContent = categoria;
-    divColumns.appendChild(divColumn);
-
-    divColumn = document.createElement("div");
-    divColumn.classList.add("column");
-    divColumn.textContent = fecha;
-    divColumns.appendChild(divColumn);
-
-    divColumn = document.createElement("div");
-    divColumn.classList.add("column");
-    divColumn.textContent = monto;
-    divColumns.appendChild(divColumn);
-
-    divColumn = document.createElement("div");
-    divColumn.classList.add("column", "is-flex");
-    let button = document.createElement("button");
-    button.classList.add("button", "is-ghost");
-    button.innerText = "eliminar";
-    button.onclick = function () {
-      removeOperation(id);
-    };
-    divColumn.appendChild(button)
-
-    button = document.createElement("button");
-    button.classList.add("button", "is-ghost");
-    button.innerText = "editar";
-    button.onclick = function () {
-      editOperation(id);
-    };
-    divColumn.appendChild(button)
-
-    divColumns.appendChild(divColumn);
-  
-    $contOperations.appendChild(divColumns);
+    for (const button of buttonsDelete) {
+      button.onclick = () => {
+        removeOperation(button.id);
+      };
     }
 
+    const buttonsEdit = divContainer.querySelectorAll(".btn-operation-edit");
+
+    for (const button of buttonsEdit) {
+      button.onclick = () => {
+        editOperation(button.id);
+      };
+    }
+
+    $contOperations.append(divContainer);
+  }
 };
 
 if (operations.length > 0) {
@@ -199,7 +176,7 @@ $formEditOperation.addEventListener("submit", (e)=>{
     operation.monto = Number($inputEditAmount.value);
     operation.tipo = $selectTypeEdit.value;
     operation.fecha = $inputEditDate.value;
-    operation.categoria = $inputEditCategory.value;
+    operation.categoria = $inputEditCategoryOperation.value;
 
     }
     return operation; 

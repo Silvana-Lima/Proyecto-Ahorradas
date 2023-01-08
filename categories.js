@@ -62,7 +62,7 @@ const showCategory = (categories) => {
 
   for (const { nombre, id } of categories) {
     $newOperationSelectCategory.innerHTML += `<option value="${nombre}" id="${id}">${nombre}</option>`;
-    $inputEditCategory.innerHTML += `<option value="${nombre}" id="${id}">${nombre}</option>`;
+    $inputEditCategoryOperation.innerHTML += `<option value="${nombre}" id="${id}">${nombre}</option>`;
 
     $selectCategory.innerHTML += `<option value="${nombre}" id="${id}">${nombre}</option>`;
 
