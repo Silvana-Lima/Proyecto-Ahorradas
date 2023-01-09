@@ -35,7 +35,6 @@ let categorySelected;
 
 const removeCategory = (id) => {
   categories = categories.filter((category) => category.id !== id);
-  console.log(id);
 
   localStorage.setItem("categorias", JSON.stringify(categories));
   showCategory(categories);

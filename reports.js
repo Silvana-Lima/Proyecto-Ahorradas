@@ -1,6 +1,44 @@
+// ****---- Variables ----****
+
+let opTipoGanancia = filterByType("ganancia", operations);
+let opTipoGasto = filterByType("gasto", operations);
+
+const mesesConGanancia = opTipoGanancia.reduce((c, {fecha, monto} )=>{
+  if(c.hasOwnProperty(fecha.slice(0, 7))){
+      c[fecha.slice(0, 7)] += monto;
+  }else{
+      c[fecha.slice(0, 7)] = monto;
+  }
+  return c;
+},{});
+
+const obtenerArrayMesesGanancia = Object.keys(mesesConGanancia).map(e=>{
+  const o = {};
+  o.mes = e;
+  o.ganancia = mesesConGanancia[e];
+  return o
+})
+
+const mesesConGasto = opTipoGasto.reduce((c, {fecha, monto} )=>{
+  if(c.hasOwnProperty(fecha.slice(0, 7))){
+      c[fecha.slice(0, 7)] += monto;
+  }else{
+      c[fecha.slice(0, 7)] = monto;
+  }
+  return c;
+},{});
+
+const obtenerArrayMesesGasto = Object.keys(mesesConGasto).map(e=>{
+  const o = {};
+  o.mes = e;
+  o.gasto = mesesConGasto[e];
+  return o
+})
+
+// ****---- Functions ----****
+
 let getTotalsByCategory = (categorias) => {
-  let opTipoGanancia = filterByType("ganancia", operations);
-  let opTipoGasto = filterByType("gasto", operations);
+
   let nuevoArrayCategorias = [...categorias];
 
   for (const categoria of nuevoArrayCategorias) {
@@ -85,8 +123,39 @@ const catMayorBalance = ()=>{
   return categoriaMayorBalance;
 }
 
+const mesMayorGanancia = () => {
+  let objMesMasGanancia = {
+    mes: "",
+    ganancia: 0,
+  };
+  for (const objeto of obtenerArrayMesesGanancia) {
+    if (objeto.ganancia > objMesMasGanancia.ganancia) {
+      objMesMasGanancia.mes = objeto.mes;
+      objMesMasGanancia.ganancia = objeto.ganancia;
+    }
+  }
+
+  return objMesMasGanancia;
+};
+
+const mesMayorGasto = ()=>{
+  let objMesMasGasto = {
+    mes: "",
+    gasto: 0,
+  };
+  for (const objeto of obtenerArrayMesesGasto) {
+    if (objeto.gasto > objMesMasGasto.gasto) {
+      objMesMasGasto.mes = objeto.mes;
+      objMesMasGasto.gasto = objeto.gasto;
+    }
+  }
+
+  return objMesMasGasto;
+}
+
 const getTotalsByMonth = ()=>{
-const array = [];
+
+  const array = [];
 
 const totalsbyMonth = {
   mes:"",
@@ -94,9 +163,6 @@ const totalsbyMonth = {
   gasto: 0
 }
 
-for (const {fecha, tipo, monto} of operations) {
-
-}
 
 }
 
@@ -108,6 +174,8 @@ const showReports = () => {
   let mayorGasto = categMayorGasto();
   let mayorBalance = catMayorBalance();
   let arrayCategorias = getTotalsByCategory(categories);
+  let mesMasGanancia = mesMayorGanancia();
+  let mesMasGasto = mesMayorGasto();
 
 $contSummary.innerHTML =`<div class="columns is-mobile">
 <div class="column has-text-weight-bold ">Categoría con mayor ganancia</div>
@@ -126,21 +194,23 @@ $contSummary.innerHTML =`<div class="columns is-mobile">
 </div>
 <div class="columns is-mobile">
     <div class="column has-text-weight-bold ">Mes con mayor ganancia</div>
-    <div class="column has-text-right"></div>
-    <div class="column has-text-right has-text-primary has-text-weight-bold"></div>
+    <div class="column has-text-right"><p>${mesMasGanancia.mes}<p></div>
+    <div class="column has-text-right has-text-primary has-text-weight-bold"><p>$${mesMasGanancia.ganancia}<p></div>
 </div>
 <div class="columns is-mobile mb-5">
     <div class="column has-text-weight-bold ">Mes con mayor gasto</div>
-    <div class="column has-text-right"></div>
-    <div class="column has-text-right has-text-danger has-text-weight-bold"></div>
+    <div class="column has-text-right"><p>${mesMasGasto.mes}<p></div>
+    <div class="column has-text-right has-text-danger has-text-weight-bold"><p>$${mesMasGasto.gasto}<p></div>
 </div>`
 
   for (const {nombre, ganancia, gasto, balance} of arrayCategorias) {
     if (balance !== 0) {
-    $contTotalByCategory.innerHTML += `<div class="columns is-mobile"><div class="column"><p>${nombre}</p></div>
-    <div class="column"><p class="has-text-primary">+$${ganancia}</p></div>
-    <div class="column"><p class="has-text-danger">-$${gasto}</p></div>
-    <div class="column"><p>$${balance}</p></div></div>`
+    $contTotalByCategory.innerHTML += `<div class="columns is-mobile">
+    <div class="column"><p>${nombre}</p></div>
+    <div class="column has-text-right-mobile"><p class="has-text-primary">+$${ganancia}</p></div>
+    <div class="column has-text-right-mobile"><p class="has-text-danger">-$${gasto}</p></div>
+    <div class="column has-text-right-mobile"><p>$${balance}</p></div>
+    </div>`
 }
 }
 };
