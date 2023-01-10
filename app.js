@@ -58,7 +58,8 @@ const $inputEditDate = $("#edit-operation-input-date");
 const $inputEditCategoryOperation = $("#edit-operation-select-category");
 const $btnCancelEditOperation = $("#btn-cancel-edit-operation");
 const $formEditOperation = $(".form-edit-operation");
-const $btnEditOperation = $("#btn-add-edit-operation")
+const $btnEditOperation = $("#btn-add-edit-operation");
+//const $contTotalByMonth = $(".cont-total-by-month");
 
 const $$sections = $$(".section");
 

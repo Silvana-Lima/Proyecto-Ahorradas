@@ -154,20 +154,24 @@ const mesMayorGasto = ()=>{
 }
 
 const getTotalsByMonth = ()=>{
+console.log(obtenerArrayMesesGanancia);
+console.log(obtenerArrayMesesGasto);
 
-  const array = [];
+ let totalesPorMes = obtenerArrayMesesGasto.map((mes) => {
+  const mesGanancia = obtenerArrayMesesGanancia.find(item => item.mes === mes.mes)
+ 
+  return {...mes, ganancia: mesGanancia?.ganancia || 0, balance: mesGanancia.ganancia - mes.gasto}
+ // console.log({...mes, ganancia: mesGanancia.ganancia, balance: mesGanancia.ganancia - mes.gasto});
+  
+   } 
+  );
 
-const totalsbyMonth = {
-  mes:"",
-  ganancia: 0,
-  gasto: 0
+  console.log(totalesPorMes);
+
 }
-
-
-}
-
 
 getTotalsByMonth()
+
 
 const showReports = () => {
   let mayorGanancia = categMayorGanancia();
