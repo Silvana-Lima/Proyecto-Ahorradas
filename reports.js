@@ -16,6 +16,8 @@ const obtenerArrayMesesGanancia = Object.keys(mesesConGanancia).map(e=>{
   const o = {};
   o.mes = e;
   o.ganancia = mesesConGanancia[e];
+  o.gasto = 0;
+  o.balance = o.ganancia - o.gasto;
   return o
 })
 
@@ -31,7 +33,9 @@ const mesesConGasto = opTipoGasto.reduce((c, {fecha, monto} )=>{
 const obtenerArrayMesesGasto = Object.keys(mesesConGasto).map(e=>{
   const o = {};
   o.mes = e;
+  o.ganancia = 0;
   o.gasto = mesesConGasto[e];
+  o.balance = o.ganancia - o.gasto;
   return o
 })
 
@@ -157,16 +161,48 @@ const getTotalsByMonth = ()=>{
 console.log(obtenerArrayMesesGanancia);
 console.log(obtenerArrayMesesGasto);
 
- let totalesPorMes = obtenerArrayMesesGasto.map((mes) => {
-  const mesGanancia = obtenerArrayMesesGanancia.find(item => item.mes === mes.mes)
+  let totalesPorMes = obtenerArrayMesesGanancia.map((mes) => {
+  const mesGasto = obtenerArrayMesesGasto.find(item => item.mes === mes.mes)
  
-  return {...mes, ganancia: mesGanancia?.ganancia || 0, balance: mesGanancia.ganancia - mes.gasto}
- // console.log({...mes, ganancia: mesGanancia.ganancia, balance: mesGanancia.ganancia - mes.gasto});
+  return {...mes, gasto: mesGasto?.gasto || 0, balance: mes.ganancia - mesGasto?.gasto || mes.ganancia};
   
    } 
   );
 
-  console.log(totalesPorMes);
+  console.log(totalesPorMes );
+
+  // let nuevoGastos = obtenerArrayMesesGasto.filter((mes)=>{
+  // return obtenerArrayMesesGanancia.find(item => item.mes === mes.mes)
+
+  // })
+  
+  // console.log(nuevoGastos);
+
+  // totalesPorMes.push(nuevoGastos);
+
+  // console.log(totalesPorMes);
+
+
+
+  // const nose =  obtenerArrayMesesGasto.map((mes) => {
+  //      const mesGanancia = obtenerArrayMesesGanancia.find(item => item.mes === mes.mes)
+     
+  //      return {...mes, ganancia: mesGanancia?.ganancia || 0, balance: mesGanancia?.ganancia - mes.gasto || mes.gasto};
+  // } )
+
+  // console.log(nose);
+
+  let mesGastoFaltante = [];
+
+  for (const i of obtenerArrayMesesGasto) {
+    for (const x of totalesPorMes) {
+      if (i.mes !== x.mes) {
+        mesGastoFaltante.push(i);
+      }
+    }
+  }
+  console.log(mesGastoFaltante);
+
 
 }
 
@@ -211,9 +247,9 @@ $contSummary.innerHTML =`<div class="columns is-mobile">
     if (balance !== 0) {
     $contTotalByCategory.innerHTML += `<div class="columns is-mobile">
     <div class="column"><p>${nombre}</p></div>
-    <div class="column has-text-right-mobile"><p class="has-text-primary">+$${ganancia}</p></div>
-    <div class="column has-text-right-mobile"><p class="has-text-danger">-$${gasto}</p></div>
-    <div class="column has-text-right-mobile"><p>$${balance}</p></div>
+    <div class="column has-text-right"><p class="has-text-primary">+$${ganancia}</p></div>
+    <div class="column has-text-right"><p class="has-text-danger">-$${gasto}</p></div>
+    <div class="column has-text-right"><p>$${balance}</p></div>
     </div>`
 }
 }
