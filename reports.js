@@ -157,56 +157,31 @@ const mesMayorGasto = ()=>{
   return objMesMasGasto;
 }
 
-const getTotalsByMonth = ()=>{
-console.log(obtenerArrayMesesGanancia);
-console.log(obtenerArrayMesesGasto);
+const getTotalsByMonth = () => {
+  const totalMeses = operations.reduce((acc, operacion) => {
+    fecha = convertirFecha(operacion.fecha);
 
-  let totalesPorMes = obtenerArrayMesesGanancia.map((mes) => {
-  const mesGasto = obtenerArrayMesesGasto.find(item => item.mes === mes.mes)
- 
-  return {...mes, gasto: mesGasto?.gasto || 0, balance: mes.ganancia - mesGasto?.gasto || mes.ganancia};
-  
-   } 
-  );
+    const fechaFormateada = `${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
 
-  console.log(totalesPorMes );
-
-  // let nuevoGastos = obtenerArrayMesesGasto.filter((mes)=>{
-  // return obtenerArrayMesesGanancia.find(item => item.mes === mes.mes)
-
-  // })
-  
-  // console.log(nuevoGastos);
-
-  // totalesPorMes.push(nuevoGastos);
-
-  // console.log(totalesPorMes);
-
-
-
-  // const nose =  obtenerArrayMesesGasto.map((mes) => {
-  //      const mesGanancia = obtenerArrayMesesGanancia.find(item => item.mes === mes.mes)
-     
-  //      return {...mes, ganancia: mesGanancia?.ganancia || 0, balance: mesGanancia?.ganancia - mes.gasto || mes.gasto};
-  // } )
-
-  // console.log(nose);
-
-  let mesGastoFaltante = [];
-
-  for (const i of obtenerArrayMesesGasto) {
-    for (const x of totalesPorMes) {
-      if (i.mes !== x.mes) {
-        mesGastoFaltante.push(i);
-      }
+    if (!acc[fechaFormateada]) {
+      acc[fechaFormateada] = {
+        ganancia: 0,
+        gasto: 0,
+        balance: 0,
+      };
     }
-  }
-  console.log(mesGastoFaltante);
 
+    acc[fechaFormateada][operacion.tipo] += operacion.monto;
+    acc[fechaFormateada]["balance"] =
+      acc[fechaFormateada]["ganancia"] - acc[fechaFormateada]["gasto"];
 
-}
+    return acc;
+  }, {});
 
-getTotalsByMonth()
+  return totalMeses;
+};
+
+getTotalsByMonth();
 
 
 const showReports = () => {
@@ -216,6 +191,7 @@ const showReports = () => {
   let arrayCategorias = getTotalsByCategory(categories);
   let mesMasGanancia = mesMayorGanancia();
   let mesMasGasto = mesMayorGasto();
+  let totalesPorMes = getTotalsByMonth();
 
 $contSummary.innerHTML =`<div class="columns is-mobile">
 <div class="column has-text-weight-bold ">Categoría con mayor ganancia</div>
@@ -252,6 +228,17 @@ $contSummary.innerHTML =`<div class="columns is-mobile">
     <div class="column has-text-right"><p>$${balance}</p></div>
     </div>`
 }
+}
+
+const fechas = Object.keys(totalesPorMes);
+
+for (const fecha of fechas) {
+  $contTotalByMonth.innerHTML += `<div class="columns is-mobile">
+  <div class="column"><p>${fecha}</p></div>
+  <div class="column has-text-right"><p class="has-text-primary">+$${totalesPorMes[fecha]["ganancia"]}</p></div>
+  <div class="column has-text-right"><p class="has-text-danger">-$${totalesPorMes[fecha]["gasto"]}</p></div>
+  <div class="column has-text-right"><p>$${totalesPorMes[fecha]["ganancia"]-totalesPorMes[fecha]["gasto"]}</p></div>
+  </div>`
 }
 };
 

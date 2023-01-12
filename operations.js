@@ -46,7 +46,8 @@ const removeOperation = (id) => {
    operations = operations.filter((operation) => operation.id !== id);
    localStorage.setItem("datosIngresados", JSON.stringify(operations));
 
-   showOperations(operations)
+   showOperations(operations);
+   showBalance(getBalance(operations));
 };
 
 let operationSelected; 
@@ -152,6 +153,9 @@ $formNewOperation.addEventListener("submit", (event) => {
   showBalance(getBalance(operations));
   cleanerNewOperation();
   showOperations(operations);
+  getTotalsByMonth();
+  showReports();
+
   $sectionNewOperation.classList.add("is-hidden");
   $sectionBalance.classList.remove("is-hidden");
   $contOperations.classList.remove("is-hidden");
@@ -181,9 +185,9 @@ $formEditOperation.addEventListener("submit", (e)=>{
     }
     return operation; 
   })
-console.log(operations);
 
 showOperations(operations);
+showBalance();
 localStorage.setItem("datosIngresados", JSON.stringify(operations));
 
 operationSelected = null;
