@@ -48,6 +48,7 @@ const removeOperation = (id) => {
 
    showOperations(operations);
    showBalance(getBalance(operations));
+   showReports();
 };
 
 let operationSelected; 
@@ -187,7 +188,8 @@ $formEditOperation.addEventListener("submit", (e)=>{
   })
 
 showOperations(operations);
-showBalance();
+showBalance(getBalance(operations));
+showReports();
 localStorage.setItem("datosIngresados", JSON.stringify(operations));
 
 operationSelected = null;
