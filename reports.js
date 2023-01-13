@@ -127,36 +127,6 @@ const catMayorBalance = ()=>{
   return categoriaMayorBalance;
 }
 
-const mesMayorGanancia = () => {
-  let objMesMasGanancia = {
-    mes: "",
-    ganancia: 0,
-  };
-  for (const objeto of obtenerArrayMesesGanancia) {
-    if (objeto.ganancia > objMesMasGanancia.ganancia) {
-      objMesMasGanancia.mes = objeto.mes;
-      objMesMasGanancia.ganancia = objeto.ganancia;
-    }
-  }
-
-  return objMesMasGanancia;
-};
-
-const mesMayorGasto = ()=>{
-  let objMesMasGasto = {
-    mes: "",
-    gasto: 0,
-  };
-  for (const objeto of obtenerArrayMesesGasto) {
-    if (objeto.gasto > objMesMasGasto.gasto) {
-      objMesMasGasto.mes = objeto.mes;
-      objMesMasGasto.gasto = objeto.gasto;
-    }
-  }
-
-  return objMesMasGasto;
-}
-
 const getTotalsByMonth = () => {
   const totalMeses = operations.reduce((acc, operacion) => {
     fecha = convertirFecha(operacion.fecha);
@@ -184,13 +154,50 @@ const getTotalsByMonth = () => {
 getTotalsByMonth();
 
 
+const getHigherAmount = (object, filter)=>{
+let higherAmount = {
+  filter: "",
+  amount: 0
+}
+
+let objectToFilter = object;
+
+const objectToIterate = Object.keys(objectToFilter);
+
+for (const i of objectToIterate) {
+
+  if (objectToFilter[i][filter] > higherAmount.amount) {
+    higherAmount.filter = i;
+    higherAmount.amount = objectToFilter[i][filter];
+  }
+}
+
+return higherAmount;
+}
+
+const highestProfitMonth = () => {
+
+  let objHighestProfitMonth = getHigherAmount(getTotalsByMonth(),"ganancia");
+
+  return objHighestProfitMonth;
+};
+
+const highestSpendingMonth = ()=>{
+  let objHighestSpendingMonth = getHigherAmount(getTotalsByMonth(),"gasto");;
+
+
+  return objHighestSpendingMonth;
+}
+
+
+
 const showReports = () => {
   let mayorGanancia = categMayorGanancia();
   let mayorGasto = categMayorGasto();
   let mayorBalance = catMayorBalance();
   let arrayCategorias = getTotalsByCategory(categories);
-  let mesMasGanancia = mesMayorGanancia();
-  let mesMasGasto = mesMayorGasto();
+  let mesMasGanancia = highestProfitMonth();
+  let mesMasGasto = highestSpendingMonth();
   let totalesPorMes = getTotalsByMonth();
 
 $contSummary.innerHTML =`<div class="columns is-mobile">
@@ -210,13 +217,13 @@ $contSummary.innerHTML =`<div class="columns is-mobile">
 </div>
 <div class="columns is-mobile">
     <div class="column has-text-weight-bold ">Mes con mayor ganancia</div>
-    <div class="column has-text-right"><p>${mesMasGanancia.mes}<p></div>
-    <div class="column has-text-right has-text-primary has-text-weight-bold"><p>$${mesMasGanancia.ganancia}<p></div>
+    <div class="column has-text-right"><p>${mesMasGanancia.filter}<p></div>
+    <div class="column has-text-right has-text-primary has-text-weight-bold"><p>$${mesMasGanancia.amount}<p></div>
 </div>
 <div class="columns is-mobile mb-5">
     <div class="column has-text-weight-bold ">Mes con mayor gasto</div>
-    <div class="column has-text-right"><p>${mesMasGasto.mes}<p></div>
-    <div class="column has-text-right has-text-danger has-text-weight-bold"><p>$${mesMasGasto.gasto}<p></div>
+    <div class="column has-text-right"><p>${mesMasGasto.filter}<p></div>
+    <div class="column has-text-right has-text-danger has-text-weight-bold"><p>$${mesMasGasto.amount}<p></div>
 </div>`
 
   for (const {nombre, ganancia, gasto, balance} of arrayCategorias) {
