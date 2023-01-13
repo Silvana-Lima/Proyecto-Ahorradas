@@ -20,8 +20,7 @@ const $boxAddCategorie = $(".box-add-category");
 const $boxEditCategorie = $(".box-edit-category");
 const $inputEditCategory = $(".input-edit-category");
 const $btnCancelEditCategory = $("#btn-cancel-edit-category");
-const $formEditCategorie = $(".form-edit-categorie")
-
+const $formEditCategorie = $(".form-edit-categorie");
 const $sectionReports = $(".section-reports");
 const $boxReportsNoOperations = $(".box-insufficient-operations");
 const $boxReportsSummary = $(".box-reports-summary");
@@ -50,7 +49,6 @@ const $btnAddCategory = $("#btn-add-category");
 const $inputCategory = $(".input-category");
 const $newOperationSelectCategory = $("#new-operation-select-category");
 const $contCategories = $(".cont-category");
-
 const $inputEditDescription = $("#edit-description");
 const $inputEditAmount = $("#edit-amount");
 const $selectTypeEdit = $("#edit-operation-select-type");
@@ -90,6 +88,7 @@ $btnReport.addEventListener("click", () => {
         if (operations != 0) {
         $boxReportsSummary.classList.remove("is-hidden");
         $boxReportsNoOperations.classList.add("is-hidden");
+        showReports();
     } else {
         $boxReportsNoOperations.classList.remove("is-hidden");
         $boxReportsSummary.classList.add("is-hidden");

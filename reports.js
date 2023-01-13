@@ -109,6 +109,9 @@ const showReports = () => {
   let monthPlusSpending = highestSpendingMonth();
   let totalsByMonth = getTotalsByMonth();
 
+  $contTotalByCategory.innerHTML = "";
+  $contTotalByMonth.innerHTML = "";
+
 $contSummary.innerHTML =`<div class="columns is-mobile">
 <div class="column has-text-weight-bold ">Categoría con mayor ganancia</div>
 <div class="column has-text-right"><p class="tag has-text-primary has-background-primary-light">${categoryPlusProfit.filter}</p></div>
@@ -160,4 +163,3 @@ for (const date of dates) {
 }
 };
 
-showReports();
