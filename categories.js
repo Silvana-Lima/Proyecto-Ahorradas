@@ -112,6 +112,8 @@ $btnAddCategory.addEventListener("click", (event) => {
   
     localStorage.setItem("categorias", JSON.stringify(categories));
     showCategory(categories);
+
+    $inputCategory.value = "";
   });
 
   $btnCancelEditCategory.addEventListener("click", (e)=>{

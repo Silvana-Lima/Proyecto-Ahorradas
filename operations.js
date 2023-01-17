@@ -44,11 +44,8 @@ const cleanerNewOperation = () => {
 
 const removeOperation = (id) => {
    operations = operations.filter((operation) => operation.id !== id);
-   localStorage.setItem("datosIngresados", JSON.stringify(operations));
-
-   showOperations(operations);
-   showBalance(getBalance(operations));
-   showReports();
+   
+   generalUpdate();
 };
 
 let operationSelected; 
@@ -114,12 +111,24 @@ const showOperations = (operations) => {
   }
 };
 
-if (operations.length > 0) {
-  $contOperations.classList.remove("is-hidden");
-  $contTitleOperations.classList.remove("is-hidden");
-  $contWithoutResults.classList.add("is-hidden");
+const initApp = () => {
+  if (operations.length > 0) {
+    $contOperations.classList.remove("is-hidden");
+    $contTitleOperations.classList.remove("is-hidden");
+    $contWithoutResults.classList.add("is-hidden");
+    showOperations(operations);
+  }
+
+  showBalance(getBalance(operations));
+};
+
+initApp();
+
+const generalUpdateOperations = () => {
+  localStorage.setItem("datosIngresados", JSON.stringify(operations));
   showOperations(operations);
-}
+  showBalance(getBalance(operations));
+};
 
 window.onload = function(){
   var date = new Date(); 
@@ -139,6 +148,7 @@ window.onload = function(){
 $formNewOperation.addEventListener("submit", (event) => {
 
   event.preventDefault()
+  
   const data = { 
     descripcion: $newOperationDescription.value,
     monto: Number($newOperationAmount.value),
@@ -149,13 +159,10 @@ $formNewOperation.addEventListener("submit", (event) => {
    };
 
   operations.push(data);
-  localStorage.setItem("datosIngresados", JSON.stringify(operations));
 
-  showBalance(getBalance(operations));
+  generalUpdateOperations();
+
   cleanerNewOperation();
-  showOperations(operations);
-  getTotalsByMonth();
-  showReports();
 
   $sectionNewOperation.classList.add("is-hidden");
   $sectionBalance.classList.remove("is-hidden");
@@ -187,10 +194,7 @@ $formEditOperation.addEventListener("submit", (e)=>{
     return operation; 
   })
 
-showOperations(operations);
-showBalance(getBalance(operations));
-showReports();
-localStorage.setItem("datosIngresados", JSON.stringify(operations));
+generalUpdateOperations();
 
 operationSelected = null;
 });
