@@ -45,7 +45,7 @@ const cleanerNewOperation = () => {
 const removeOperation = (id) => {
    operations = operations.filter((operation) => operation.id !== id);
    
-   generalUpdate();
+   generalUpdateOperations();
 };
 
 let operationSelected; 
@@ -111,24 +111,13 @@ const showOperations = (operations) => {
   }
 };
 
-const initApp = () => {
-  if (operations.length > 0) {
-    $contOperations.classList.remove("is-hidden");
-    $contTitleOperations.classList.remove("is-hidden");
-    $contWithoutResults.classList.add("is-hidden");
-    showOperations(operations);
-  }
-
-  showBalance(getBalance(operations));
-};
-
-initApp();
-
 const generalUpdateOperations = () => {
   localStorage.setItem("datosIngresados", JSON.stringify(operations));
   showOperations(operations);
   showBalance(getBalance(operations));
 };
+
+// ****---- Function to add current date in "formulary new operation" ----****
 
 window.onload = function(){
   var date = new Date(); 
@@ -164,22 +153,18 @@ $formNewOperation.addEventListener("submit", (event) => {
 
   cleanerNewOperation();
 
-  $sectionNewOperation.classList.add("is-hidden");
-  $sectionBalance.classList.remove("is-hidden");
+  changeScreen($$sections, $sectionBalance);
   $contOperations.classList.remove("is-hidden");
   $contWithoutResults.classList.add("is-hidden");
   $contTitleOperations.classList.remove("is-hidden");
 });
 
 $btnCancelEditOperation.addEventListener("click", ()=>{
-  $sectionBalance.classList.remove("is-hidden");
-  $sectionEditOperatioin.classList.add("is-hidden");
+  changeScreen($$sections, $sectionBalance);
 })
 
 $formEditOperation.addEventListener("submit", (e)=>{
   e.preventDefault();
-  $sectionBalance.classList.remove("is-hidden");
-  $sectionEditOperatioin.classList.add("is-hidden");
 
   operations = operations.map((operation)=>{
     if (operation.id === operationSelected.id){
@@ -195,6 +180,7 @@ $formEditOperation.addEventListener("submit", (e)=>{
   })
 
 generalUpdateOperations();
+changeScreen($$sections, $sectionBalance);
 
 operationSelected = null;
 });

@@ -36,12 +36,10 @@ let categorySelected;
 const removeCategory = (id) => {
   categories = categories.filter((category) => category.id !== id);
 
-  localStorage.setItem("categorias", JSON.stringify(categories));
-  showCategory(categories);
+  updateCategories();
 };
 
 const editCategory = (id) => {
-    event.preventDefault();
 
     $boxAddCategorie.classList.add("is-hidden");
     $boxEditCategorie.classList.remove("is-hidden");
@@ -92,11 +90,13 @@ const showCategory = (categories) => {
     };
   }
 
-
   $contCategories.append(divContainer);
 };
 
-showCategory(categories);
+const updateCategories = ()=>{
+  localStorage.setItem("categorias", JSON.stringify(categories));
+  showCategory(categories);
+}
 
 // ****---- Events ----****
 
@@ -109,9 +109,8 @@ $btnAddCategory.addEventListener("click", (event) => {
     };
   
     categories.push(newCategory);
-  
-    localStorage.setItem("categorias", JSON.stringify(categories));
-    showCategory(categories);
+
+    updateCategories();
 
     $inputCategory.value = "";
   });
@@ -137,8 +136,7 @@ $btnAddCategory.addEventListener("click", (event) => {
        return category;
     })
 
-    localStorage.setItem("categorias", JSON.stringify(categories));
-    showCategory(categories);
+    updateCategories();
 
     categorySelected = null;
 
