@@ -46,6 +46,11 @@ const removeOperation = (id) => {
    operations = operations.filter((operation) => operation.id !== id);
    
    generalUpdateOperations();
+
+   if (operations.length === 0) {
+    $contOperations.classList.add("is-hidden");
+    $contWithoutResults.classList.remove("is-hidden");
+  }
 };
 
 let operationSelected; 
@@ -68,6 +73,25 @@ const showOperations = (operations) => {
   $contOperations.innerHTML = "";
 
   const divContainer = document.createElement("div");
+
+  divContainer.innerHTML = `
+  <div class="columns is-hidden-mobile cont-title-operations mt-5 mb-3">
+   <div class="column">
+     <h6 class="title is-6">Descripción</h6>
+   </div>
+   <div class="column">
+     <h6 class="title is-6">Categoría</h6>
+   </div>
+   <div class="column">
+     <h6 class="title is-6">Fecha</h6>
+   </div>
+   <div class="column">
+     <h6 class="title is-6">Monto</h6>
+   </div>
+   <div class="column">
+     <h6 class="title is-6">Acciones</h6>
+   </div>
+ </div>`;
 
   for (const { descripcion, monto, categoria, fecha, tipo, id } of operations) {
     divContainer.innerHTML += `<div class="columns is-mobile is-multiline">
@@ -156,7 +180,6 @@ $formNewOperation.addEventListener("submit", (event) => {
   changeScreen($$sections, $sectionBalance);
   $contOperations.classList.remove("is-hidden");
   $contWithoutResults.classList.add("is-hidden");
-  $contTitleOperations.classList.remove("is-hidden");
 });
 
 $btnCancelEditOperation.addEventListener("click", ()=>{
