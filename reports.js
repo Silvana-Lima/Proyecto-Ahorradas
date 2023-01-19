@@ -165,8 +165,10 @@ for (const date of dates) {
 
 const initApp = () => {
   if (operations.length > 0) {
-    $contOperations.classList.remove("is-hidden");
-    $contWithoutResults.classList.add("is-hidden");
+
+    hideElement($contWithoutResults);
+    showElement($contOperations);
+
     showOperations(operations);
   }
 

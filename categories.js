@@ -41,8 +41,8 @@ const removeCategory = (id) => {
 
 const editCategory = (id) => {
 
-    $boxAddCategorie.classList.add("is-hidden");
-    $boxEditCategorie.classList.remove("is-hidden");
+    hideElement($boxAddCategorie);
+    showElement($boxEditCategorie);
 
     categorySelected = categories.find((category) => category.id === id);
 
@@ -118,15 +118,15 @@ $btnAddCategory.addEventListener("click", (event) => {
   $btnCancelEditCategory.addEventListener("click", (e)=>{
     e.preventDefault();
 
-    $boxAddCategorie.classList.remove("is-hidden");
-    $boxEditCategorie.classList.add("is-hidden");
+    hideElement($boxEditCategorie);
+    showElement($boxAddCategorie);
   });
 
   $formEditCategorie.addEventListener("submit", (e)=>{
     e.preventDefault();
 
-    $boxAddCategorie.classList.remove("is-hidden");
-    $boxEditCategorie.classList.add("is-hidden");
+    hideElement($boxEditCategorie);
+    showElement($boxAddCategorie);
 
     categories = categories.map((category)=>{
        if (category.id === categorySelected.id) {

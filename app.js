@@ -71,6 +71,9 @@ const changeScreen = (hideSections, showSection) => {
     showSection.classList.remove("is-hidden");
   };
 
+const hideElement = (element)=> element.classList.add("is-hidden");
+const showElement = (element)=> element.classList.remove("is-hidden");
+
 
 // ****---- Events to change the screens----****
 
@@ -86,12 +89,12 @@ $btnReport.addEventListener("click", () => {
     changeScreen($$sections, $sectionReports);
 
         if (operations != 0) {
-        $boxReportsSummary.classList.remove("is-hidden");
-        $boxReportsNoOperations.classList.add("is-hidden");
+        hideElement($boxReportsNoOperations);
+        showElement($boxReportsSummary);
         showReports();
     } else {
-        $boxReportsNoOperations.classList.remove("is-hidden");
-        $boxReportsSummary.classList.add("is-hidden");
+        hideElement($boxReportsSummary);
+        showElement($boxReportsNoOperations);
     }
   });
 

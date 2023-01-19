@@ -48,16 +48,16 @@ const removeOperation = (id) => {
    generalUpdateOperations();
 
    if (operations.length === 0) {
-    $contOperations.classList.add("is-hidden");
-    $contWithoutResults.classList.remove("is-hidden");
+    hideElement($contOperations);
+    showElement($contWithoutResults);
   }
 };
 
 let operationSelected; 
 
 const editOperation = (id) => {
-  $sectionBalance.classList.add("is-hidden");
-  $sectionEditOperatioin.classList.remove("is-hidden");
+
+  changeScreen($$sections, $sectionEditOperatioin);
 
   operationSelected = operations.find((operation) => operation.id === id);
 
@@ -178,8 +178,8 @@ $formNewOperation.addEventListener("submit", (event) => {
   cleanerNewOperation();
 
   changeScreen($$sections, $sectionBalance);
-  $contOperations.classList.remove("is-hidden");
-  $contWithoutResults.classList.add("is-hidden");
+  hideElement($contWithoutResults);
+  showElement($contOperations);
 });
 
 $btnCancelEditOperation.addEventListener("click", ()=>{
