@@ -21,7 +21,7 @@ let getTotalsByCategory = () => {
 
 const getTotalsByMonth = () => {
   const totalMonths = operations.reduce((acc, operation) => {
-    date = convertirFecha(operation.fecha);
+    date = convertToNewDate(operation.fecha);
 
     const formatDate = `${date.getMonth() + 1}/${date.getFullYear()}`;
 
@@ -162,6 +162,8 @@ for (const date of dates) {
   </div>`
 }
 };
+
+// ***>>> Function to init app <<<*** //
 
 const initApp = () => {
   if (operations.length > 0) {

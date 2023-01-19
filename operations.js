@@ -35,13 +35,6 @@ const showBalance = (balance) => {
   $totalBalance.innerText = `$${balance.total}`;
 };
 
-const cleanerNewOperation = () => {
-  $newOperationDescription.value = "";
-  $newOperationAmount.value = 0;
-  $newOperationSelectType.value = "gasto";
-  $newOperationSelectCategory.value = "Comida";
-};
-
 const removeOperation = (id) => {
    operations = operations.filter((operation) => operation.id !== id);
    
@@ -66,6 +59,13 @@ const editOperation = (id) => {
   $selectTypeEdit.value = operationSelected["tipo"];
   $inputEditDate.value = operationSelected["fecha"];
   $inputEditCategoryOperation.value = operationSelected["categoria"];
+};
+
+const cleanerNewOperation = () => {
+  $newOperationDescription.value = "";
+  $newOperationAmount.value = 0;
+  $newOperationSelectType.value = "gasto";
+  $newOperationSelectCategory.value = "Comida";
 };
 
 
@@ -182,7 +182,8 @@ $formNewOperation.addEventListener("submit", (event) => {
   showElement($contOperations);
 });
 
-$btnCancelEditOperation.addEventListener("click", ()=>{
+$btnCancelNewOperation.addEventListener("click", (e)=>{
+  e.preventDefault();
   changeScreen($$sections, $sectionBalance);
 })
 
@@ -208,7 +209,6 @@ changeScreen($$sections, $sectionBalance);
 operationSelected = null;
 });
 
-$btnCancelNewOperation.addEventListener("click", (e)=>{
-  e.preventDefault();
+$btnCancelEditOperation.addEventListener("click", ()=>{
   changeScreen($$sections, $sectionBalance);
 })

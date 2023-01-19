@@ -111,7 +111,7 @@ const updateCategories = () => {
 
 // ****---- Events ----****
 
-$btnAddCategory.addEventListener("click", (event) => {
+$formAddCategory.addEventListener("submit", (event) => {
   event.preventDefault();
 
   const newCategory = {

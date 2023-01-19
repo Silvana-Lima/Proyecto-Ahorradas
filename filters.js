@@ -23,13 +23,13 @@ const filterByCategory = (filter, operations) => {
 
 };
 
-function convertirFecha (fechaString) {
-  var fechaND = fechaString.split("-");
-   var anio = fechaND[0];
-   var mes = fechaND[1] - 1;
-   var dia = fechaND[2];
+function convertToNewDate (dateString) {
+  var arrayDate = dateString.split("-");
+   var year = arrayDate[0];
+   var month = arrayDate[1] - 1;
+   var day = arrayDate[2];
 
-  return new Date(anio, mes, dia);
+  return new Date(year, month, day);
 }
 
 const filterByDate = (filter, operations)=> date = operations.filter((operation) => operation.fecha >= filter)
@@ -39,13 +39,13 @@ const filterByOrder = (filter, operations) => {
   switch (filter) {
     case "mas reciente":
       sortedOperations = operations.sort(
-        (a, b) => convertirFecha(b.fecha) - convertirFecha(a.fecha)
+        (a, b) => convertToNewDate(b.fecha) - convertToNewDate(a.fecha)
       );
       break;
 
     case "menos reciente":
       sortedOperations = operations.sort(
-        (a, b) => convertirFecha(a.fecha) - convertirFecha(b.fecha)
+        (a, b) => convertToNewDate(a.fecha) - convertToNewDate(b.fecha)
       );
       break;
 
@@ -120,5 +120,3 @@ $selectOrder.addEventListener("change", () => {
   showOperations(filterOperation());
   showBalance(getBalance(filterOperation()));
 });
-
-showBalance(getBalance(filterOperation()));
