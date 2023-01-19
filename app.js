@@ -62,7 +62,7 @@ const $contTotalByMonth = $(".cont-total-by-month");
 const $$sections = $$(".section");
 
 
-// ****---- Function to change the screens----****
+// ****---- Functions to change the screens----****
 
 const changeScreen = (hideSections, showSection) => {
     for (const section of hideSections) {

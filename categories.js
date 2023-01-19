@@ -34,19 +34,30 @@ let categorySelected;
 // ****---- Functions ----****
 
 const removeCategory = (id) => {
+  removeOperationsOfCategory(id);
+
   categories = categories.filter((category) => category.id !== id);
 
   updateCategories();
 };
 
 const editCategory = (id) => {
+  hideElement($boxAddCategorie);
+  showElement($boxEditCategorie);
 
-    hideElement($boxAddCategorie);
-    showElement($boxEditCategorie);
+  categorySelected = categories.find((category) => category.id === id);
 
+  $inputEditCategory.value = categorySelected["nombre"];
+};
+
+const removeOperationsOfCategory = (id) => {
+  operations = operations.filter((operation) => {
     categorySelected = categories.find((category) => category.id === id);
 
-    $inputEditCategory.value = categorySelected["nombre"];
+    return operation.categoria !== categorySelected.nombre;
+  });
+
+  generalUpdateOperations();
 };
 
 const showCategory = (categories) => {
@@ -93,51 +104,50 @@ const showCategory = (categories) => {
   $contCategories.append(divContainer);
 };
 
-const updateCategories = ()=>{
+const updateCategories = () => {
   localStorage.setItem("categorias", JSON.stringify(categories));
   showCategory(categories);
-}
+};
 
 // ****---- Events ----****
 
 $btnAddCategory.addEventListener("click", (event) => {
-    event.preventDefault();
-  
-    const newCategory = {
-      nombre: $inputCategory.value,
-      id: uuid.v1(),
-    };
-  
-    categories.push(newCategory);
+  event.preventDefault();
 
-    updateCategories();
+  const newCategory = {
+    nombre: $inputCategory.value,
+    id: uuid.v1(),
+  };
 
-    $inputCategory.value = "";
+  categories.push(newCategory);
+
+  updateCategories();
+
+  $inputCategory.value = "";
+});
+
+$btnCancelEditCategory.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  hideElement($boxEditCategorie);
+  showElement($boxAddCategorie);
+});
+
+$formEditCategorie.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  hideElement($boxEditCategorie);
+  showElement($boxAddCategorie);
+
+  categories = categories.map((category) => {
+    if (category.id === categorySelected.id) {
+      category.nombre = $inputEditCategory.value;
+    }
+
+    return category;
   });
 
-  $btnCancelEditCategory.addEventListener("click", (e)=>{
-    e.preventDefault();
+  updateCategories();
 
-    hideElement($boxEditCategorie);
-    showElement($boxAddCategorie);
-  });
-
-  $formEditCategorie.addEventListener("submit", (e)=>{
-    e.preventDefault();
-
-    hideElement($boxEditCategorie);
-    showElement($boxAddCategorie);
-
-    categories = categories.map((category)=>{
-       if (category.id === categorySelected.id) {
-        category.nombre = $inputEditCategory.value;
-       }
-
-       return category;
-    })
-
-    updateCategories();
-
-    categorySelected = null;
-
-  })
+  categorySelected = null;
+});
