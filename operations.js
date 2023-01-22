@@ -30,8 +30,8 @@ let getBalance = (operations) => {
 };
 
 const showBalance = (balance) => {
-  $totalGananciasBalance.innerText = `+$${balance.ganancia}`;
-  $totalGastosBalance.innerText = `-$${balance.gasto}`;
+  $totalProfitsBalance.innerText = `+$${balance.ganancia}`;
+  $totalSpencesBalance.innerText = `-$${balance.gasto}`;
   $totalBalance.innerText = `$${balance.total}`;
 };
 
