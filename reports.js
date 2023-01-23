@@ -43,26 +43,22 @@ const getTotalsByMonth = () => {
   return totalMonths;
 };
 
-const getHigherAmount = (object, filter)=>{
-let higherAmount = {
-  filter: "",
-  amount: 0
+const getHigherAmount = (object, keyFilter) => {
+  let higherAmount = {
+    filter: "",
+    amount: 0
 }
+ const objectToIterate = Object.keys(object);
 
-let objectToFilter = object;
-
-const objectToIterate = Object.keys(objectToFilter);
-
-for (const i of objectToIterate) {
-
-  if (objectToFilter[i][filter] > higherAmount.amount) {
-    higherAmount.filter = i;
-    higherAmount.amount = objectToFilter[i][filter];
+  for (const key of objectToIterate) {
+    if (object[key][keyFilter] > higherAmount.amount) {
+      higherAmount.filter = key;
+      higherAmount.amount = object[key][keyFilter];
+    }
   }
-}
 
-return higherAmount;
-}
+  return higherAmount;
+};
 
 const highestProfitCategory = () => {
 
